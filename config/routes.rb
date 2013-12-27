@@ -1,5 +1,11 @@
 LoginApp::Application.routes.draw do
   
+  resources :images do
+    get :sync, on: :collection
+  end
+
+  resources :instance_types
+
   root 'welcome#index'
 
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords"}
