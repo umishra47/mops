@@ -1,0 +1,74 @@
+<% content_for :breadcrumbs do %>
+	<div id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li><i class="icon-home"></i><a href="<%= root_path %>">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
+			<li class="active">My Instances<span class="divider"></span></li>
+		</ul>
+	</div>
+<% end %>
+
+<% content_for :header do %>
+	<div class="page-header position-relative">
+		<h1>My Instances</h1>
+	</div><!--/page-header-->
+<% end %>
+
+<div class="row-fluid">
+	<span class="span12">
+		<table id="table_report" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th class='hidden-480'>Instance ID</th>
+					<th class='hidden-phone'>Instance Type</th>
+					<th>Launch Time</th>
+					<th class='hidden-480'>Cost</th>
+					<th class='hidden-480'>Status</th>
+					<th class="center">Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @instances.each do |instance| %>
+					<tr>
+						<td><%= instance.name %></td>
+						<td class='hidden-480'><%= instance.ec2_instance_id %></td>
+						<td class='hidden-phone'><%= instance.instance_type %></td>
+						<td><%= instance.launch_time %></td>
+						<td class='hidden-480'><%= instance.cost %></td>
+						<% inst_state = instance.status || "unknown" %>
+						<td class='hidden-480'>
+							<%= content_tag :span, class: instance_state_class(inst_state) do %>
+								<%= inst_state.camelize %>
+							<% end %>
+						</td>
+						<td class="center">
+							<div class="inline position-relative">
+								<a href="<%= instance_path(instance) %>" class="btn btn-mini btn-info" data-rel="tooltip" title="View Details"><i class="icon-list icon-only"></i></a>
+								<button class="btn btn-mini btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench icon-only"></i></button>
+								<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
+									<li><a href="" class="tooltip-warning" data-rel="tooltip" title="Start Instance" data-placement="left"><span class="green"><i class="icon-play"></i></span> </a></li>
+									<li><a href="" class="tooltip-warning" data-rel="tooltip" title="Stop Instance" data-placement="left"><span class="orange"><i class="icon-stop"></i></span> </a></li>
+									<li><a href="" class="tooltip-warning" data-rel="tooltip" title="Reboot Instance" data-placement="left"><span class="blue"><i class="icon-refresh"></i></span> </a></li>
+									<li><a href="" class="tooltip-warning" data-rel="tooltip" title="Terminate Instance" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</span>
+</div>
+
+<% content_for :page_scripts do %>
+	<%= javascript_include_tag "jquery.dataTables.min", "jquery.dataTables.bootstrap" %>
+<% end %>
+
+<% content_for :inline_scripts do %>
+	<script type="text/javascript">
+		$(function() {
+			
+		});
+	</script>
+<% end %>

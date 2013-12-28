@@ -1,10 +1,6 @@
 LoginApp::Application.routes.draw do
-  
-  resources :images do
-    get :sync, on: :collection
-  end
 
-  resources :instance_types
+  resources :instances
 
   root 'welcome#index'
 
@@ -16,5 +12,7 @@ LoginApp::Application.routes.draw do
   get "/auth/:provider/callback" => "sessions#create"
   get "/users/sign_out" => "sessions#destroy", :as => :signout
   get "/google/auth" => "sessions#create"
-  
+  get "/launch_instance" => "instances#new", as: :launch_instance
+
+  resources :instance_types
 end

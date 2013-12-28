@@ -11,4 +11,23 @@ module ApplicationHelper
        ""
      end
   end
+ 
+  def instance_state_class(state)
+    case state
+     when 'pending'
+       "label"
+     when 'running'
+       "label label-success"
+     when 'shutting-down'
+       "label label-warning"
+     when 'terminated'
+       "label label-inverse"
+     when 'stopping'
+       "label label-important"
+     when 'stopped'
+       "label label-important"
+     else
+       "label"
+     end
+  end
 end

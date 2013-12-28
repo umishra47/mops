@@ -11,19 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131227092146) do
+ActiveRecord::Schema.define(version: 20131228071852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "images", force: true do |t|
-    t.string   "name"
-    t.string   "image_id"
-    t.string   "image_state"
-    t.boolean  "is_public"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "instance_types", force: true do |t|
     t.string   "name"
@@ -32,6 +23,21 @@ ActiveRecord::Schema.define(version: 20131227092146) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "instances", force: true do |t|
+    t.string   "name"
+    t.string   "ec2_instance_id"
+    t.string   "ami"
+    t.string   "status"
+    t.datetime "launch_time"
+    t.integer  "user_id"
+    t.string   "instance_type"
+    t.decimal  "cost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "instances", ["user_id"], name: "index_instances_on_user_id", using: :btree
 
   create_table "units", force: true do |t|
     t.string   "provider"

@@ -14,6 +14,7 @@
 		<!-- basic styles -->
 		<%= stylesheet_link_tag "application", :media => "all" %>
 		<!-- page specific plugin styles -->
+		<%= yield :page_styles %>
 		<!--[if lt IE 9]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.css" />
 		<![endif]-->
@@ -39,12 +40,12 @@
 		<%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 	
 	</head>
-  <body>
+	<body>
 		<div class="navbar navbar-inverse">
 			<div class="navbar-inner">
 				<div class="container-fluid">
 
-					<a class="brand" href="#"><small><i class="icon-leaf"></i> LOGO </small> </a>
+					<a class="brand" href="#"><small><i class="icon-leaf"></i> MOPS </small> </a>
 					<ul class="nav pull-right ace-nav">
 						<li class="grey">
 						</li>
@@ -107,13 +108,19 @@
 					<li>
 						<a href="#" class="dropdown-toggle" >
 							<i class="icon-desktop"></i>
-							<span>UI Elements</span>
+							<span>Elements</span>
 							<b class="arrow icon-angle-down"></b>
 						</a>
 						<ul class="submenu">
-							<li><a href="elements.html"><i class="icon-double-angle-right"></i> Elements</a></li>
-							<li><a href="buttons.html"><i class="icon-double-angle-right"></i> Buttons & Icons</a></li>
+							<li><a href="<%= instances_path %>"><i class="icon-double-angle-right"></i> My Instances</a></li>
 						</ul>
+					</li>
+					
+					<li>
+						<a href="<%= launch_instance_path %>">
+							<i class="icon-plane"></i>
+							<span>Launch Instance</span>
+						</a>
 					</li>
 				</ul><!--/.nav-list-->
 				<div id="sidebar-collapse"><i class="icon-double-angle-left"></i></div>
@@ -121,24 +128,8 @@
 			</div><!--/#sidebar-->
 
 			<div id="main-content" class="clearfix">
-					
-					<div id="breadcrumbs">
-						<ul class="breadcrumb">
-							<li><i class="icon-home"></i> <a href="#">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-							<li class="active">Empty Page</li>
-						</ul><!--.breadcrumb-->
 
-						<div id="nav-search">
-							<form class="form-search">
-									<span class="input-icon">
-										<input autocomplete="off" id="nav-search-input" type="text" class="input-small search-query" placeholder="Search ..." />
-										<i id="nav-search-icon" class="icon-search"></i>
-									</span>
-							</form>
-						</div><!--#nav-search-->
-					</div><!--#breadcrumbs-->
-
-
+					<%= yield :breadcrumbs %>
 
 					<div id="page-content" class="clearfix">
 
@@ -149,8 +140,11 @@
 							<% end %>
 						<% end %>
 
+						<%= yield :header %>
+
 						<div class="row-fluid">
 							<!-- PAGE CONTENT BEGINS HERE -->
+							<%= yield %>
 							<!-- PAGE CONTENT ENDS HERE -->
 						 </div><!--/row-->
 	
@@ -167,6 +161,12 @@
 
 		<!-- basic scripts -->
 		<%= javascript_include_tag "application" %>
+		
+		<!-- page specific plugin scripts -->
+		<%= yield :page_scripts %>
+		
+		<!-- inline scripts related to this page -->
+		<%= yield :inline_scripts %>
 
 	</body>
 </html>

@@ -1,0 +1,2 @@
+class AwsActionsController < ApplicationController
+end
