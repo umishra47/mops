@@ -5,5 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
          
   has_many :instances, dependent: :destroy
+  has_many :authentications, :dependent => :delete_all
+  def apply_omniauth(auth) 
+    self.email = auth['info']['email'] 
+    authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token']) 
+  end
   
 end

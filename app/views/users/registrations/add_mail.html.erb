@@ -1,0 +1,32 @@
+<div id="signup-box" class="visible widget-box no-border">
+
+        <div class="widget-body">
+         <div class="widget-main">
+            <h4 class="header green lighter bigger"><i class="icon-group blue"></i>Please Enter Your Twitter Email</h4>
+            
+            <%= form_for(:user, :as => resource_name, :url => add_mail_path) do |f| %>
+                 <fieldset>
+                    <label>
+                        <span class="block input-icon input-icon-right">
+                            <%= f.email_field :email, :autofocus => true, :class => "span12", :placeholder => "Email", :required => true %>
+                            <i class="icon-envelope"></i>
+                        </span>
+                    </label>
+                    
+                    <div class="row-fluid">
+                        <button type="submit" class="span6 btn btn-small btn-success">
+                          <i class="icon-arrow-right icon-on-right"></i> Proceed
+                        </button>
+                    </div>
+                    
+                  </fieldset>
+            <% end %>
+        </div>
+        
+        <div class="toolbar center">
+            <a href=<%= root_path %> class="back-to-login-link"><i class="icon-arrow-left"></i> Back to login</a>
+        </div>
+
+     </div><!--/widget-body-->
+
+    </div><!--/signup-box-->

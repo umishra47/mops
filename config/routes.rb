@@ -1,17 +1,20 @@
 LoginApp::Application.routes.draw do
 
+  get "authentication/index"
+  get "authentication/create"
+  get "authentication/destroy"
   resources :instances
 
-  root 'welcome#index'
 
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords"}
   devise_scope :user do
-   get "logout", to: "devise/sessions#destroy", as: "logout"
+    get 'registration', to: "users/registrations#auth"
+    get "logout", to: "devise/sessions#destroy", as: "logout"
+    match '/add_mail' => 'users/registrations#add_mail', via: [:get, :post]
+    get '/auth/failure' => "users/registrations#auth"
   end
-
-  get "/auth/:provider/callback" => "sessions#create"
-  get "/users/sign_out" => "sessions#destroy", :as => :signout
-  get "/google/auth" => "sessions#create"
+  root 'welcome#index'
+  match '/auth/:provider/callback' => 'authentication#create', via: [:get, :post]
   get "/launch_instance" => "instances#new", as: :launch_instance
 
   resources :instance_types

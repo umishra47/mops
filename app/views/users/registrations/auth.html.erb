@@ -1,0 +1,29 @@
+<div id="login-box" class="visible widget-box no-border">
+
+    <div class="widget-body">
+     <div class="widget-main">
+       <h1 class="header lighter bigger"> Sign In Options</h1><br>
+       <h4> Sign in through one of these services:</h4>
+       <div>
+         <a href="/auth/twitter" class="auth_provider">
+           <%= image_tag "twitter_64.png", :size => "64x64", :alt => "Twitter" %>
+           Twitter
+         </a>
+       </div>
+       <div>
+         <a href="/auth/google_oauth2" class="auth_provider">
+           <%= image_tag "google_64.png", :size => "64x64", :alt => "Google" %>
+           Google
+         </a>
+       </div>
+     </div><!--/widget-main-->
+    
+    
+     <div>
+       Don't use these services?
+            <a href=<%= new_registration_path(:user) %> >Sign up </a> or
+            <a href=<%= new_session_path(:user) %> > sign in</a> with a password.
+     </div>
+    </div><!--/widget-body-->
+
+</div><!--/login-box-->

@@ -27,6 +27,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    authbuttons-rails (0.1.2)
     aws-sdk (1.31.3)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -93,8 +94,6 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-facebook (1.5.1)
-      omniauth-oauth2 (~> 1.1.0)
     omniauth-google-oauth2 (0.2.1)
       omniauth (~> 1.0)
       omniauth-oauth2
@@ -171,6 +170,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authbuttons-rails
   aws-sdk (~> 1.0)
   coffee-rails (~> 4.0.0)
   debugger
@@ -179,7 +179,6 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   omniauth
-  omniauth-facebook
   omniauth-google-oauth2
   omniauth-twitter
   pg

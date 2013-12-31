@@ -11,12 +11,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem 'omniauth-twitter'
-gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth'
 gem "font-awesome-rails"
 gem 'aws-sdk', '~> 1.0'
-
+gem "authbuttons-rails"
 group :doc do
   gem 'sdoc', require: false
 end

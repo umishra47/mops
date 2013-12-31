@@ -60,14 +60,14 @@
 							<a class="user-menu dropdown-toggle" href="#" data-toggle="dropdown">
 								<%= image_tag "user.jpg", alt: "Jason's Photo", class: "nav-user-photo" %>
 								<span id="user_info">
-									<small>Welcome,</small> Jason
+									<small>Welcome,</small> <%= current_user.email %>
 								</span>
 								<i class="icon-caret-down"></i>
 							</a>
 							<ul id="user_menu" class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
 								<li><a href="#"><i class="icon-cog"></i> Settings</a></li>
 								<li class="divider"></li>
-								<li><a href="#"><i class="icon-off"></i> Logout</a></li>
+								<li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
 							</ul>
 						</li>
 					</ul><!--/nav-->
