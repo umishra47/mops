@@ -1,5 +1,7 @@
 LoginApp::Application.routes.draw do
 
+  resources :subscriptions
+
   get "authentication/index"
   get "authentication/create"
   get "authentication/destroy"

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ami: MyString
+  type: 
+  start_date: 2014-01-02
+  end_date: 2014-01-02
+  user_id: 
+  instance_id: 
+
+two:
+  ami: MyString
+  type: 
+  start_date: 2014-01-02
+  end_date: 2014-01-02
+  user_id: 
+  instance_id: 

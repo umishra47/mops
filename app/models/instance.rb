@@ -1,5 +1,6 @@
 class Instance < ActiveRecord::Base
   belongs_to :user
+  has_many :subscriptions
 
   after_create :launch_ec2_instance
 
