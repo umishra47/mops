@@ -4,7 +4,7 @@ namespace :job_scheduler do
     notificatios = Subscription.where(notify_date: Date.today)
     notifications.each do |notify|
       user = User.find(notify.user_id)
-      UserMailer.welcome_email(user).deliver
+      UserMailer.transaction_email(user).deliver
     end
   end
 

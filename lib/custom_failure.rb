@@ -1,7 +1,7 @@
 class CustomFailure < Devise::FailureApp
   def redirect_url
     if warden_options[:scope] == :user
-      registration_path
+      regist_path
     else
       root_path
     end

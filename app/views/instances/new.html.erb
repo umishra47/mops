@@ -65,7 +65,7 @@
 															</td>
 															<td><%= it.name %></td>
 															<td><%= it.memory %></td>
-															<td><%= it.cost %></td>
+															<td><%= it.cost_type %></td>
 														</tr>
 													<% end %>
 												</tbody>
@@ -88,8 +88,10 @@
 										<label class="control-label" for="ami"></label>
 										<div class="controls">
 											<span class="span6 input-icon input-icon-right">
+												
 												<%= f.submit "   Launch", class: "btn btn-success" %>
 												<%= link_to "Cancel", :back, class: "btn", style: "width:65px;"%>
+											
 											</span>
 										</div>
 									</div>

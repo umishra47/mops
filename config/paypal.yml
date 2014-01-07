@@ -1,0 +1,11 @@
+production: &defaults
+  access_key: AKIAJE3J7YXO2G6AXJAQ
+  secret_token: 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
+  ami_ids: [["vTiger Ami","ami-c6710faf"], ["TP-AMI", "ami-b2f28fdb"], ["testing_123", "fedfv"]]
+  return_url: "http:localhost:3000/transaction_completed"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
