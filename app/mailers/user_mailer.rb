@@ -4,8 +4,12 @@ class UserMailer < ActionMailer::Base
   def transaction_email(user)
     @user = user
     @url  = 'http://localhost:3000'
-    for i in 0..5
-      mail(to: "hsingh@enbake.com", subject: 'Welcome to My Awesome Site')
-    end
+    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+  end
+  
+  def delete_instance(user, instance)
+    @user = user
+    @instance = instance
+    mail(to: @user.email, subject: 'Instance Terminated')
   end
 end

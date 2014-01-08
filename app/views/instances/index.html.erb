@@ -45,13 +45,9 @@
 						<td class="center">
 							<div class="inline position-relative">
 								<a href="<%= instance_path(instance) %>" class="btn btn-mini btn-info" data-rel="tooltip" title="View Details"><i class="icon-list icon-only"></i></a>
-								<button class="btn btn-mini btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench icon-only"></i></button>
-								<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-									<li><a href="" class="tooltip-warning" data-rel="tooltip" title="Start Instance" data-placement="left"><span class="green"><i class="icon-play"></i></span> </a></li>
-									<li><a href="" class="tooltip-warning" data-rel="tooltip" title="Stop Instance" data-placement="left"><span class="orange"><i class="icon-stop"></i></span> </a></li>
-									<li><a href="" class="tooltip-warning" data-rel="tooltip" title="Reboot Instance" data-placement="left"><span class="blue"><i class="icon-refresh"></i></span> </a></li>
-									<li><a href="" class="tooltip-warning" data-rel="tooltip" title="Terminate Instance" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
-								</ul>
+								<%= link_to instance_path(instance),:confirm => 'Are you sure?', :method => :delete do %>
+									<span class="red"><i class="icon-trash"></i></span>
+								<% end %>
 							</div>
 						</td>
 					</tr>
