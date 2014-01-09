@@ -12,4 +12,10 @@ class UserMailer < ActionMailer::Base
     @instance = instance
     mail(to: @user.email, subject: 'Instance Terminated')
   end
+  
+   def notification_email(user, instance)
+    @user = user
+    @instance = instance
+    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+  end
 end

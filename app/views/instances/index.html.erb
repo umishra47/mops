@@ -44,10 +44,17 @@
 						</td>
 						<td class="center">
 							<div class="inline position-relative">
-								<a href="<%= instance_path(instance) %>" class="btn btn-mini btn-info" data-rel="tooltip" title="View Details"><i class="icon-list icon-only"></i></a>
-								<%= link_to instance_path(instance),:confirm => 'Are you sure?', :method => :delete do %>
-									<span class="red"><i class="icon-trash"></i></span>
-								<% end %>
+								<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
+                     				<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
+										<li><a href="<%= instance_path(instance) %>" class="btn btn-mini btn-info" data-rel="tooltip" title="View Details"><i class="icon-list icon-only"></i></a></li>
+										<li>
+											<% unless inst_state == 'terminated'%>
+												<%= link_to instance_path(instance),confirm: 'Are you sure?', method: :delete do %>
+												<span class="red"><i class="icon-trash"></i></span>
+												<% end %>
+											<% end %>
+										</li>
+									</ul>
 							</div>
 						</td>
 					</tr>

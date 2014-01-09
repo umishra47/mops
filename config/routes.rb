@@ -10,7 +10,7 @@ LoginApp::Application.routes.draw do
 
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords"}
   devise_scope :user do
-    get 'regist', to: "users/registrations#auth"
+    match 'regist', to: "users/registrations#auth", via: [:get, :post]
     get "logout", to: "devise/sessions#destroy", as: "logout"
     match '/add_mail' => 'users/registrations#add_mail', via: [:get, :post]
     get '/auth/failure' => "users/registrations#auth"
@@ -19,7 +19,8 @@ LoginApp::Application.routes.draw do
   root 'welcome#index'
   match '/auth/:provider/callback' => 'authentication#create', via: [:get, :post]
   get "/launch_instance" => "instances#new", as: :launch_instance
-  get "/transaction_completed" => "instances#transaction_details"
+  get "/transaction_completed" => "instances#show"
+  match "/transaction_payment" => "instances#transaction_details", via: [:get, :post]
 
   resources :instance_types
 end
