@@ -4,9 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to mops, <%= @user.first_name %></h1>
+    <p>Hi, <%= @user.first_name %></p>
     <p>
-      Your request have been processed. You will be notified after successful lanch of your instance <%= @instance.name + ' (' + @instance.instance_type + ')'%>.
+      Your request for launching instance <%= @instance.name + ' (' + @instance.instance_type + ')' %> with AMI (<%= @instance.ami %>) is under process. You will be notified with the details after successful launch of your instance.
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>

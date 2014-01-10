@@ -1,21 +1,28 @@
 class UserMailer < ActionMailer::Base
   default :from => "harjindersidhu12@gmail.com"
   
-  def transaction_email(user)
+  def notification_email(user, instance)
     @user = user
-    @url  = 'http://localhost:3000'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+    @instance = instance
+    mail(to: @user.email, subject: '[MOPS] Instance Launch Alert')
+  end
+  
+  def transaction_email(user, instance)
+    @user = user
+    @instance = instance
+    mail(to: @user.email, subject: '[MOPS] Instance Launched Successfully')
   end
   
   def delete_instance(user, instance)
     @user = user
     @instance = instance
-    mail(to: @user.email, subject: 'Instance Terminated')
+    mail(to: @user.email, subject: '[MOPS] Instance Termination Alert')
   end
   
-   def notification_email(user, instance)
+  def subscription_notify_date(user, instance)
     @user = user
     @instance = instance
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+    mail(to: @user.email, subject: '[MOPS] Subscription renewable Alert')
   end
+  
 end

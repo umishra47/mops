@@ -1,17 +1,11 @@
 namespace :job_scheduler do
 
   task :send_renew_alert => :environment do
-    notificatios = Subscription.where(notify_date: Date.today)
+    notifications = Subscription.where(notify_date: Date.today)
     notifications.each do |notify|
       user = User.find(notify.user_id)
-      UserMailer.transaction_email(user).deliver
-    end
-  end
-
-  task :charge_cost => :environment do
-    subscriptions = Subscription.where(start_date: Date.today)
-    subscriptions.each do |subscribe|
-      
+      instance = Instance.find(notify.instance_id)
+      UserMailer.subscription_notify_date(user, instance).deliver
     end
   end
 

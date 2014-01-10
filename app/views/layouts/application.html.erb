@@ -37,7 +37,7 @@
 		
 		<!-- For all other devices -->
 		<!-- Size should be 32 x 32 pixels -->
-		<%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+		<%= favicon_link_tag 'favicon.png', :rel => 'shortcut icon' %>
 	
 	</head>
 	<body>
@@ -45,7 +45,7 @@
 			<div class="navbar-inner">
 				<div class="container-fluid">
 
-					<a class="brand" href="#"><small><i class="icon-leaf"></i> MOPS </small> </a>
+					<a class="brand" href="#"><small><i class="icon-cloud"></i> MOPS </small> </a>
 					<ul class="nav pull-right ace-nav">
 						<li class="grey">
 						</li>
@@ -65,8 +65,6 @@
 								<i class="icon-caret-down"></i>
 							</a>
 							<ul id="user_menu" class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
-								<li><a href="#"><i class="icon-cog"></i> Settings</a></li>
-								<li class="divider"></li>
 								<li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
 							</ul>
 						</li>
@@ -97,26 +95,26 @@
 				</div><!-- #sidebar-shortcuts -->
 
 				<ul class="nav nav-list">
-					<li>
-						<a href="index.html">
+					<li id="nav-elements-dashboard">
+						<a href="<%= root_path %>">
 							<i class="icon-dashboard"></i>
 							<span>Dashboard</span>
 						</a>
 					</li>
 
 					
-					<li>
+					<li id="nav-elements" >
 						<a href="#" class="dropdown-toggle" >
 							<i class="icon-desktop"></i>
 							<span>Elements</span>
 							<b class="arrow icon-angle-down"></b>
 						</a>
 						<ul class="submenu">
-							<li><a href="<%= instances_path %>"><i class="icon-double-angle-right"></i> My Instances</a></li>
+							<li id="nav-elements-instances" ><a href="<%= instances_path %>"><i class="icon-double-angle-right"></i> My Instances</a></li>
 						</ul>
 					</li>
 					
-					<li>
+					<li id="nav-elements-launch" >
 						<a href="<%= launch_instance_path %>">
 							<i class="icon-plane"></i>
 							<span>Launch Instance</span>

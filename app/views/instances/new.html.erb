@@ -89,7 +89,7 @@
 										<div class="controls">
 											<span class="span6 input-icon input-icon-right">
 												
-												<%= f.submit "   Launch", class: "btn btn-success" %>
+												<%= f.submit "   Launch", class: "btn btn-success btn_launch" %>
 												<%= link_to "Cancel", :back, class: "btn", style: "width:65px;"%>
 											
 											</span>
@@ -110,10 +110,12 @@
 
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
-
-		$(function() {
+		window.onload = function() {
 			$('.instance_type:first').attr('checked', 'checked');
-		});
-	
+			$('li#nav-elements-launch').addClass('active');
+			if (navigator.userAgent.match(/Firefox/)) {
+				$('.btn_launch').attr("style", "padding-top:7px;padding-bottom:8px;");
+			};
+		};
 		</script>
 <% end %>

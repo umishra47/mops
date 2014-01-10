@@ -61,10 +61,10 @@ class InstancesController < ApplicationController
           end_date = instance.launch_time + 30.days
           notify_date = end_date - 7.days
           Subscription.create(ami: instance.ami, instance_type: instance[:instance_type], user_id: instance.user.id, 
-            instance_id: instance.ec2_instance_id, start_date: instance.launch_time, end_date: end_date, 
+            instance_id: instance.id, start_date: instance.launch_time, end_date: end_date, 
             notify_date: notify_date)
           instance.update_attributes(status: 'launched')
-          UserMailer.transaction_email(instance.user).deliver
+          UserMailer.transaction_email(instance.user, instance).deliver
         end
       elsif params[:txn_type] == "subscr_cancel"
         UserMailer.delete_instance(instance.user, instance).deliver

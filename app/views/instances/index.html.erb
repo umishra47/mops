@@ -70,8 +70,9 @@
 
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
-		$(function() {
-			
-		});
+		window.onload = function() {
+			$('li#nav-elements').addClass('active open');
+			$('li#nav-elements-instances').addClass('active');
+		};
 	</script>
 <% end %>

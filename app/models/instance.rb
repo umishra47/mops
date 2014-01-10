@@ -6,7 +6,7 @@ class Instance < ActiveRecord::Base
   
   def paypal_url
     values = {
-      :business => "dummy09807@gmail.com",
+      :business => AppConfig.business_email,
       :cmd => '_xclick-subscriptions',
       :upload => 1,
       :item_name => name + ' (' + instance_type + ')',
@@ -28,8 +28,11 @@ class Instance < ActiveRecord::Base
     begin
       ec2 = AWS::EC2.new(access_key_id: AppConfig.access_key, secret_access_key: AppConfig.secret_token)
       response = ec2.instances.create(image_id: ami, instance_type: instance_type)
+      description = ec2.client.describe_instances({instance_ids: [response.id]})
+      instances_set = description.reservation_set.map(&:instances_set).flatten!
+      dns_name = instances_set.first.dns_name
       cost = InstanceType.find_by_name(instance_type)[:cost]
-      update_attributes({ec2_instance_id: response.id, launch_time: DateTime.now, cost: cost})
+      update_attributes({ec2_instance_id: response.id, launch_time: DateTime.now, cost: cost, dns_name: dns_name})
     rescue
       false
     end
