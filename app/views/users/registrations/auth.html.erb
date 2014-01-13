@@ -1,25 +1,28 @@
 <div id="login-box" class="visible widget-box no-border">
 
     <div class="widget-body">
-     <div class="widget-main">
-       <h1 class="header lighter bigger"> Sign In Options</h1><br>
-       <h4> Sign in through one of these services:</h4>
+     <div class="widget-main" style="text-align:center;">
+       <h1 class="header lighter bigger" style="font-weight: normal;color: #606060;"> Sign In</h1><br>
        <div>
-         <a href="/auth/twitter" class="auth_provider">
-           <%= image_tag "twitter_64.png", :size => "64x64", :alt => "Twitter" %>
-           Twitter
+         <a href="/auth/twitter" class="auth_provider icon-twitter btn btn-primary">
+           | Sign in with Twitter
          </a>
-       </div>
-       <div>
-         <a href="/auth/google_oauth2" class="auth_provider">
-           <%= image_tag "google_64.png", :size => "64x64", :alt => "Google" %>
-           Google
+         <br/>
+         <br/>
+         <div style="height: 1px;background-color: #c0c0c0; text-align: center">
+           <span style="background-color: beige;padding:4px; position: relative; top: -0.8em;">
+             OR
+           </span>
+         </div>
+         <br/>
+         <a href="/auth/google_oauth2" class="auth_provider icon-google-plus btn btn-primary">
+           | Sign in with Google
          </a>
        </div>
      </div><!--/widget-main-->
     
     
-     <div>
+     <div style="text-align:center;background-color:darkgray;">
        Don't use these services?
             <a href=<%= new_registration_path(:user) %> >Sign up </a> or
             <a href=<%= new_session_path(:user) %> > sign in</a> with a password.
