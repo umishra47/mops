@@ -1,32 +1,40 @@
-<div id="login-box" class="visible widget-box no-border">
+<div class="visible widget-box no-border" style="background-color:#abbac3;">
 
     <div class="widget-body">
      <div class="widget-main" style="text-align:center;">
-       <h1 class="header lighter bigger" style="font-weight: normal;color: #606060;"> Sign In</h1><br>
+       <h3 class="lighter bigger" style="font-weight: normal;color: #606060;"> Sign In using account on</h3><br>
        <div>
-         <a href="/auth/twitter" class="auth_provider icon-twitter btn btn-primary">
-           | Sign in with Twitter
+         <a href="/auth/twitter" class="auth_provider btn btn-light btn-small auth-twitter">
+           <i class="icon-twitter" style="font-size: 28px;color: #00C5F9;margin:0px 6px 2px 8px;vertical-align:-3px"></i>Twitter
          </a>
-         <br/>
-         <br/>
-         <div style="height: 1px;background-color: #c0c0c0; text-align: center">
-           <span style="background-color: beige;padding:4px; position: relative; top: -0.8em;">
-             OR
-           </span>
-         </div>
-         <br/>
-         <a href="/auth/google_oauth2" class="auth_provider icon-google-plus btn btn-primary">
-           | Sign in with Google
+         <br/><br/>
+         <a href="/auth/google_oauth2" class="auth_provider btn btn-light btn-small auth-google">
+         <i class="icon-google-plus" style="font-size: 23px;color: #DA4936;margin:0px 7px 2px 8px;"></i>Google
          </a>
        </div>
+       <br/> OR <br/>
+       <h5>
+         <a href=<%= new_registration_path(:user) %> >Sign up </a> or
+         <a href=<%= new_session_path(:user) %> > sign in</a> with a password
+       </h5>
      </div><!--/widget-main-->
     
-    
-     <div style="text-align:center;background-color:darkgray;">
-       Don't use these services?
-            <a href=<%= new_registration_path(:user) %> >Sign up </a> or
-            <a href=<%= new_session_path(:user) %> > sign in</a> with a password.
-     </div>
     </div><!--/widget-body-->
 
 </div><!--/login-box-->
+
+<style>
+	.auth-twitter{
+		padding:2px 35px 2px 35px;
+		text-align:center;font-size: 17px;
+		border-color:#D1D1D1;border-width:1px;
+	}
+	.auth-google{
+		padding:3px 37px 4px 37px;
+		text-align:center;font-size: 17px;
+		border-color:#D1D1D1;border-width:1px;
+	}
+	.icon-twitter{
+		
+	}
+</style>

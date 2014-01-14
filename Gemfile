@@ -15,7 +15,6 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth'
 gem "font-awesome-rails"
 gem 'aws-sdk', '~> 1.0'
-gem "authbuttons-rails"
 gem 'whenever', :require => false
 
 group :doc do

@@ -12,7 +12,7 @@ class InstanceType < ActiveRecord::Base
 
   def cost_type
     unless self[:cost].blank?
-      "$" + number_with_precision(self[:cost], precision: 3).to_s + " per Month"
+      "$" + number_with_precision(self[:cost], precision: 2).to_s + " per Month"
     else
       "$ 0 per Month"
     end
