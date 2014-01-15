@@ -28,6 +28,7 @@ class Instance < ActiveRecord::Base
     begin
       ec2 = AWS::EC2.new(access_key_id: AppConfig.access_key, secret_access_key: AppConfig.secret_token)
       response = ec2.instances.create(image_id: ami, instance_type: instance_type)
+      sleep 30
       description = ec2.client.describe_instances({instance_ids: [response.id]})
       instances_set = description.reservation_set.map(&:instances_set).flatten!
       dns_name = instances_set.first.dns_name
