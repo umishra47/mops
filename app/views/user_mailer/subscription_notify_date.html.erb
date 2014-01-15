@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi, <%= @user.first_name %></p>
+    <p>
+      Your subscription for instance <%= @instance.name + ' (' + @instance.instance_type + ')' %> will be renewed in next 7 days. You will be auto-charged with $<%= number_with_precision(@instance.cost, precision: 2) %> for the same.
+    </p>
+  </body>
+</html>
