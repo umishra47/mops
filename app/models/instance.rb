@@ -27,7 +27,8 @@ class Instance < ActiveRecord::Base
   def launch_ec2_instance
     begin
       ec2 = AWS::EC2.new(access_key_id: AppConfig.access_key, secret_access_key: AppConfig.secret_token)
-      response = ec2.instances.create(image_id: ami, instance_type: instance_type)
+      response = ec2.instances.create(image_id: ami, instance_type: instance_type, key_name: "mops_master_key")
+      ec2.client.create_tags(resources: [response.id], tags: [{ key: 'Name', value: "Mops_Instance_#{id}" }])
       sleep 30
       description = ec2.client.describe_instances({instance_ids: [response.id]})
       instances_set = description.reservation_set.map(&:instances_set).flatten!
