@@ -70,7 +70,7 @@ class InstancesController < ApplicationController
         UserMailer.delete_instance(instance.user, instance).deliver
       end
     end
-    redirect_to regist_path
+    redirect_to login_path
   end
   
   private

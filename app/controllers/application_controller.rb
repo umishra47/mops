@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token
   
   def after_sign_out_path_for(resource)
-    regist_path
+    login_path
   end
 end
