@@ -44,6 +44,8 @@ class InstancesController < ApplicationController
         ppr = PayPal::Recurring.new(:profile_id => instance.profileId)
         ppr.cancel
         instance.update_attributes(status: 'terminated')
+        subscription = Subscription.find_by_instance_id(params[:id])
+        subscription.update_attributes(status: "expired")
       end
     end  
     redirect_to :back
@@ -62,7 +64,7 @@ class InstancesController < ApplicationController
           notify_date = end_date - 7.days
           Subscription.create(ami: instance.ami, instance_type: instance[:instance_type], user_id: instance.user.id, 
             instance_id: instance.id, start_date: instance.launch_time, end_date: end_date, 
-            notify_date: notify_date)
+            notify_date: notify_date, status: 'active')
           instance.update_attributes(status: 'launched')
           UserMailer.transaction_email(instance.user, instance).deliver
         end

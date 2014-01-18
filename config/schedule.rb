@@ -23,5 +23,6 @@ set :output, 'log/file.log'
 
 every :day, :at => '1200am'do
   rake "job_scheduler:send_renew_alert"
+  rake "job_scheduler:update_end_date"
 end
 
