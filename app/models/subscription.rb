@@ -1,4 +1,4 @@
 class Subscription < ActiveRecord::Base
   belongs_to :user
-  belongs_to :instance
+  belongs_to :product
 end

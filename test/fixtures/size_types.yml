@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  size_id: 1
+  disk: 1
   memory: 9.99
-  cost: 9.99
+  cost_per_month: 9.99
 
 two:
-  name: MyString
+  size_id: 1
+  disk: 1
   memory: 9.99
-  cost: 9.99
+  cost_per_month: 9.99

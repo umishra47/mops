@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115064411) do
+ActiveRecord::Schema.define(version: 20140123123331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,63 +25,80 @@ ActiveRecord::Schema.define(version: 20140115064411) do
     t.datetime "updated_at"
   end
 
-  create_table "instance_types", force: true do |t|
+  create_table "product_types", force: true do |t|
     t.string   "name"
     t.decimal  "memory"
-    t.decimal  "cost"
+    t.decimal  "cost_per_month"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "instances", force: true do |t|
+  create_table "products", force: true do |t|
+    t.string   "web_name"
+    t.string   "product_id"
     t.string   "name"
-    t.string   "ec2_instance_id"
-    t.string   "ami"
+    t.string   "image_id"
     t.string   "status"
     t.datetime "launch_time"
-    t.integer  "user_id"
-    t.string   "instance_type"
+    t.string   "region"
+    t.string   "product_type"
+    t.integer  "size_type"
     t.decimal  "cost"
+    t.integer  "region_id"
+    t.boolean  "backups_active", default: false
+    t.string   "backups"
+    t.string   "snapshots"
+    t.boolean  "locked",         default: false
+    t.string   "profileId"
+    t.string   "dns_name"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profileId"
-    t.string   "token"
-    t.string   "dns_name"
   end
 
-  add_index "instances", ["user_id"], name: "index_instances_on_user_id", using: :btree
+  create_table "region_types", force: true do |t|
+    t.integer  "region_id"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "size_types", force: true do |t|
+    t.integer  "size_id"
+    t.integer  "disk"
+    t.integer  "cpu"
+    t.decimal  "memory"
+    t.decimal  "cost_per_month"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "subscriptions", force: true do |t|
-    t.string   "ami"
-    t.string   "instance_type"
+    t.string   "type"
+    t.string   "image_id"
+    t.string   "product_type"
+    t.integer  "size_type"
     t.date     "start_date"
     t.date     "end_date"
     t.date     "notify_date"
     t.integer  "user_id"
-    t.integer  "instance_id"
+    t.integer  "product_id"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
   end
 
-  add_index "subscriptions", ["instance_id"], name: "index_subscriptions_on_instance_id", using: :btree
+  add_index "subscriptions", ["product_id"], name: "index_subscriptions_on_product_id", using: :btree
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
-  create_table "units", force: true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",          null: false
+    t.string   "encrypted_password",     default: "",          null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,           null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -94,6 +111,7 @@ ActiveRecord::Schema.define(version: 20140115064411) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "default_region",         default: "us-east-1"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

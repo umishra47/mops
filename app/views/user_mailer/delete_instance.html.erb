@@ -6,7 +6,11 @@
   <body>
    <p>Hi, <%= @user.first_name %></p>
     <p>
-      Your instance <%= @instance.name + ' (' + @instance.instance_type + ')'%> has been terminated and you will not be charged from here onwards.
+      <% if @product.web_name == "AWS"%>
+        Your instance <%= @product.name + ' (' + @product.product_type + ')'%> has been terminated and you will not be charged from here onwards.
+      <% elsif @product.web_name == "DigitalOcean" %>
+        Your instance <%= @product.name + ' (' + @product.size_type + ')'%> has been terminated and you will not be charged from here onwards.
+      <% end%>
     </p>
   </body>
 </html>

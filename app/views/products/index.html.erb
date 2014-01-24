@@ -2,15 +2,15 @@
 	<div id="breadcrumbs">
 		<ul class="breadcrumb">
 			<li><i class="icon-home"></i><a href="<%= root_path %>">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-			<li class="active">My Instances<span class="divider"></span></li>
+			<li class="active">My Products<span class="divider"></span></li>
 		</ul>
 	</div>
 <% end %>
 
 <% content_for :header do %>
 	<div class="page-header position-relative">
-		<h1 style="display:inline;float:left;">My Instances</h1>
-	<%= link_to "Launch New Instance", launch_instance_path, class: "btn btn-small btn-primary", style: "left:71%;"%>
+		<h1 style="display:inline;float:left;">My Products</h1>
+	<%= link_to "Launch New Instance", launch_product_path, class: "btn btn-small btn-primary", style: "left:71%;"%>
 	</div><!--/page-header-->
 <% end %>
 
@@ -30,11 +30,11 @@
 			</thead>
 
 			<tbody>
-				<% @instances.each do |instance| %>
+				<% @products.each do |instance| %>
 					<tr>
 						<td><%= instance.name %></td>
-						<td class='hidden-480'><%= instance.ec2_instance_id %></td>
-						<td class='hidden-phone'><%= instance.instance_type %></td>
+						<td class='hidden-480'><%= instance.product_id %></td>
+						<td class='hidden-phone'><%= instance.product_type %></td>
 						<td><%= instance.launch_time %></td>
 						<td class='hidden-480'><%= instance.cost %></td>
 						<% inst_state = instance.status || "unknown" %>
@@ -46,11 +46,11 @@
 						<td class="center">
 							<div class="inline position-relative">
 								<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
-                     				<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-										<li><a href="<%= instance_path(instance) %>" class="btn btn-mini btn-info" data-rel="tooltip" title="View Details"><i class="icon-list icon-only"></i></a></li>
+									<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
+										<li><a href="<%= product_path(instance) %>" class="btn btn-mini btn-info" data-rel="tooltip" title="View Details"><i class="icon-list icon-only"></i></a></li>
 										<li>
 											<% unless inst_state == 'terminated'%>
-												<%= link_to instance_path(instance),confirm: 'Are you sure?', method: :delete do %>
+												<%= link_to product_path(instance),confirm: 'Are you sure?', method: :delete do %>
 												<span class="red"><i class="icon-trash"></i></span>
 												<% end %>
 											<% end %>

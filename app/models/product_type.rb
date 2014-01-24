@@ -1,7 +1,7 @@
 include ActionView::Helpers::NumberHelper
 
-class InstanceType < ActiveRecord::Base
-
+class ProductType < ActiveRecord::Base
+  
   def memory
     unless self[:memory].blank?
       self[:memory].to_s + " GiB"
@@ -10,9 +10,9 @@ class InstanceType < ActiveRecord::Base
      end
   end
 
-  def cost_type
-    unless self[:cost].blank?
-      "$" + number_with_precision(self[:cost], precision: 2).to_s + " per Month"
+  def cost
+    unless self[:cost_per_month].blank?
+      "$" + number_with_precision(self[:cost_per_month], precision: 2).to_s + " per Month"
     else
       "$ 0 per Month"
     end

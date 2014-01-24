@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  product_id: MyString
+  name: MyString
+  image_id: MyString
+  status: MyString
+  launch_time: 2014-01-23 15:47:09
+  region: MyString
+  product_type: MyString
+  size_type: 1
+  cost: 9.99
+  region_id: 1
+  backups_active: false
+  backups: MyString
+  snapshots: MyString
+  locked: false
+  profileId: MyString
+  dns_name: MyString
+
+two:
+  type: 
+  product_id: MyString
+  name: MyString
+  image_id: MyString
+  status: MyString
+  launch_time: 2014-01-23 15:47:09
+  region: MyString
+  product_type: MyString
+  size_type: 1
+  cost: 9.99
+  region_id: 1
+  backups_active: false
+  backups: MyString
+  snapshots: MyString
+  locked: false
+  profileId: MyString
+  dns_name: MyString

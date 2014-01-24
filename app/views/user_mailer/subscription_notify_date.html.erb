@@ -6,7 +6,11 @@
   <body>
     <p>Hi, <%= @user.first_name %></p>
     <p>
-      Your subscription for instance <%= @instance.name + ' (' + @instance.instance_type + ')' %> will be renewed in next 7 days. You will be auto-charged with $<%= number_with_precision(@instance.cost, precision: 2) %> for the same.
+      <% if @product.web_name == "AWS" %>
+        Your subscription for instance <%= @product.name + ' (' + @product.product_type + ')' %> will be renewed in next 7 days. You will be auto-charged with $<%= number_with_precision(@product.cost_per_month, precision: 2) %> for the same.
+      <% elsif @product.web_name == "DigitalOcean"%>
+        Your subscription for instance <%= @product.name + ' (' + @product.size_type + ')' %> will be renewed in next 7 days. You will be auto-charged with $<%= number_with_precision(@product.cost_per_month, precision: 2) %> for the same.
+      <%end%>
     </p>
   </body>
 </html>
