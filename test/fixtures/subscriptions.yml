@@ -1,17 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  ami: MyString
   type: 
-  start_date: 2014-01-02
-  end_date: 2014-01-02
+  image_id: MyString
+  product_type: MyString
+  size_type: 1
+  start_date: 2014-01-23
+  end_date: 2014-01-23
+  notify_date: 2014-01-23
   user_id: 
-  instance_id: 
+  product_id: 
+  status: MyString
 
 two:
-  ami: MyString
   type: 
-  start_date: 2014-01-02
-  end_date: 2014-01-02
+  image_id: MyString
+  product_type: MyString
+  size_type: 1
+  start_date: 2014-01-23
+  end_date: 2014-01-23
+  notify_date: 2014-01-23
   user_id: 
-  instance_id: 
+  product_id: 
+  status: MyString

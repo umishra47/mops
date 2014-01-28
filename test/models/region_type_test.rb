@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class InstancesControllerTest < ActionController::TestCase
+class RegionTypeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

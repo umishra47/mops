@@ -5,11 +5,20 @@
   </head>
   <body>
     <p>Hi, <%= @user.first_name %></p>
-    <p>
-      Your instance <%= @instance.name + ' (' + @instance.instance_type + ')' %> with Instance Id (<%= @instance.ec2_instance_id %>) has been launched successfully. 
-    </p>
-    <p>
-      You instance will be ready with in half an hour and you can access it at <%= @instance.dns_name %>
-    </p>
+    <% if @product.web_name == "AWS" %>
+      <p>
+        Your instance <%= @product.name + ' (' + @product.product_type + ')' %> with Instance Id (<%= @product.product_id %>) has been launched successfully.
+      </p>
+      <p>
+        You instance will be ready with in half an hour and you can access it at <%= @product.dns_name %>
+      </p>
+    <% elsif @product.web_name == "DigitalOcean"%>
+      <p>
+        Your instance <%= @product.name + ' (' + @product.size_type + ')' %> with Instance Id (<%= @product.product_id %>) has been launched successfully.
+      </p>
+      <p>
+        You instance will be ready with in half an hour and you can access it (after test let you know :) )
+      </p>
+    <% end %>
   </body>
 </html>
