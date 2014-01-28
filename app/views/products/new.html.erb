@@ -30,29 +30,25 @@
 						<div class="step-content row-fluid position-relative">
 							<%= form_for @product, html: {id: 'validation-form', class: 'form-horizontal'} do |f| %>
 								<div class="step-pane active">
-								
-									<h4 class="lighter block green">Name your Instance</h4>
 
 									<div class="control-group">
-										<label class="control-label" for="name"></label>
+										<label class="control-label lighter block green" for="name">Name your Instance</label>
 										<div class="controls">
 											<span class="span6 input-icon input-icon-right">
 												<%= f.text_field :name, class: "span12", id: "name", required: true  %>
 											</span>
 										</div>
 									</div>
-								
-									<h4 class="lighter block green">Select Instance Type</h4>
 
 									<div class="control-group">
-										<label class="control-label" for="image"></label>
+										<label class="control-label lighter block green" for="image">Select Instance Type</label>
 										<div class="controls">
 											<table id="table_bug_report" class="table table-striped table-bordered table-hover">
 												<thead>
 													<tr>
 														<th></th>
 														<th><i class="icon-list-alt"></i> Type</th>
-														<th><i class="icon-hdd"></i> Memory</th>
+														<th class="hidden-phone"><i class="icon-hdd"></i> Memory</th>
 														<th><i class="icon-briefcase"></i> Cost</th>
 													</tr>
 												</thead>
@@ -65,7 +61,7 @@
 																	<label><input type="radio" name="product[product_type]" class="product_type" value="<%= it.name %>"><span class="lbl"></span></label>
 																</td>
 																<td><%= it.name %></td>
-																<td><%= it.memory %></td>
+																<td class="hidden-phone"><%= it.memory %></td>
 																<td><%= it.cost %></td>
 															</tr>
 														<% end %>
@@ -76,7 +72,7 @@
 																	<label><input type="radio" name="product[size_type]" class="product_type" value="<%= it.size_id %>"><span class="lbl"></span></label>
 																</td>
 																<td><%= it.size_id %></td>
-																<td><%= it.memory %></td>
+																<td class="hidden-phone"><%= it.memory %></td>
 																<td><%= it.cost %></td>
 															</tr>
 														<% end %>
@@ -86,10 +82,8 @@
 										</div>
 									</div>
 
-									<h4 class="lighter block green">Select AMI</h4>
-
 									<div class="control-group">
-										<label class="control-label" for=""></label>
+										<label class="control-label lighter block green" for="">Select AMI</label>
 										<div class="controls">
 											<span class="span6 input-icon input-icon-right">
 												<%if AppConfig.cloud[:name] == "AWS"%>
@@ -101,10 +95,9 @@
 										</div>
 									</div>
 									<%if AppConfig.cloud[:name] == "DigitalOcean"%>
-										<h4 class="lighter block green">Select Region</h4>
 	
 										<div class="control-group">
-											<label class="control-label" for=""></label>
+											<label class="control-label lighter block green" for="">Select Region</label>
 											<div class="controls">
 												<span class="span6 input-icon input-icon-right">
 														<%= f.select :region_id, RegionType.all.map{|cc| [cc.name, cc.region_id]},{}, {class: "span12", id: "ami"} %>

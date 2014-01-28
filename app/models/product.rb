@@ -21,7 +21,7 @@ class Product < ActiveRecord::Base
       :item_name => name + ' (' + val + ')',
       :a3 => number_with_precision(cost, precision: 0),
       :p3 => '1',
-      :t3 => 'M',
+      :t3 => 'D',
       :no_note => '1',
       :src => '1',
       :sra => '1',

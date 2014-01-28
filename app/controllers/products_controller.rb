@@ -71,23 +71,41 @@ class ProductsController < ApplicationController
         UserMailer.notification_email(product.user, product).deliver
         product.update_attributes(profileId: params[:subscr_id])
       elsif params[:txn_type] == "subscr_payment" && params[:payment_status] == 'Completed'
-        unless product.product_id
+        subscript = product.user.subscriptions.where(sub_tran: params[:txn_id])
+        unless !subscript.empty?
+          unless product.product_id
 
-          if product.web_name == "AWS"
-            product_type = product[:product_type]
-            size_type = nil
-            product.send(:launch_ec2_instance)
-          elsif product.web_name == "DigitalOcean"
-            size_type = product[:size_type]
-            product_type = nil
-            product.send(:launch_droplet)
-          end 
-
-          end_date = product.launch_time + 30.days
-          notify_date = end_date - 7.days
-          Subscription.create(image_id: product.image_id, product_type: product_type, size_type: size_type, user_id: product.user.id, product_id: product.id, start_date: product.launch_time, end_date: end_date, notify_date: notify_date, status: 'active')
-          product.update_attributes(status: 'launched')
-          UserMailer.transaction_email(product.user, product).deliver
+            if product.web_name == "AWS"
+              product_type = product[:product_type]
+              size_type = nil
+              product.send(:launch_ec2_instance)
+            elsif product.web_name == "DigitalOcean"
+              size_type = product[:size_type]
+              product_type = nil
+              product.send(:launch_droplet)
+            end 
+            end_date = product.launch_time + 30.days
+            notify_date = end_date - 7.days
+            product.user.subscriptions.create(
+             web_type: product.web_name, image_id: product.image_id,
+             product_type: product_type, instance_id: product.product_id, sub_tran: params[:txn_id],
+             size_type: size_type, user_id: product.user.id, product_id: product.id,
+             start_date: product.launch_time, end_date: end_date, notify_date: notify_date, status: 'active'
+            )
+            product.update_attributes(status: 'launched')
+            UserMailer.transaction_email(product.user, product).deliver
+          else
+            end_date = Date.today + 30.days
+            notify_date = end_date - 7.days
+            product.user.subscriptions.create(
+              web_type: product.web_name, image_id: product.image_id, product_type: product_type,
+              instance_id: product.product_id, sub_tran: params[:txn_id], size_type: size_type,
+              user_id: product.user.id, product_id: product.id, start_date: product.launch_time,
+              end_date: end_date, notify_date: notify_date, status: 'active'
+            )
+            product.update_attributes(status: 'launched')
+            UserMailer.new_payment_email(product.user, product).deliver
+          end
         end
       elsif params[:txn_type] == "subscr_cancel"
         UserMailer.delete_instance(product.user, product).deliver
@@ -97,8 +115,10 @@ class ProductsController < ApplicationController
   end
   
   def set_digital_ocean
-    Digitalocean.client_id  = "08c20fe93f98064204825db9459df3d5"
-    Digitalocean.api_key    = "373fb5f5c499a410c0702e82bce00a21"
+    if AppConfig.cloud[:name] == "DigitalOcean"
+      Digitalocean.client_id  = AppConfig.cloud[:creds][:access_key]
+      Digitalocean.api_key    = AppConfig.cloud[:creds][:secret_token]
+    end
   end
 
   private

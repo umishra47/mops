@@ -75,10 +75,12 @@ ActiveRecord::Schema.define(version: 20140123123331) do
   end
 
   create_table "subscriptions", force: true do |t|
-    t.string   "type"
+    t.string   "web_type"
     t.string   "image_id"
     t.string   "product_type"
+    t.string   "instance_id"
     t.integer  "size_type"
+    t.string   "sub_tran"
     t.date     "start_date"
     t.date     "end_date"
     t.date     "notify_date"

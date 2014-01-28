@@ -25,4 +25,10 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: '[MOPS] Subscription renewable Alert')
   end
   
+  def new_payment_email(user, product)
+    @user = user
+    @product = product
+    mail(to: @user.email, subject: '[MOPS] Subscription renewed Alert')
+  end
+  
 end
