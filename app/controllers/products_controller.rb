@@ -5,13 +5,13 @@ class ProductsController < ApplicationController
   before_action :set_digital_ocean
   
   def index
-    respond_with @products = current_user.products.order('launch_time DESC')
+    respond_with @products = current_user.products.where(web_name: AppConfig.cloud[:name]).order('launch_time DESC')
   end
 
   def show
     if params[:cm]
       params_id = params[:cm]
-      flash[:notice] = "Your Transaction is Completed. Thank You for Joining."
+      flash[:notice] = "Your Transaction is Completed. Thank You for Joining. You will be notified with the details after successful launch of your instance. "
     else
       params_id = params[:id]
     end
@@ -26,14 +26,12 @@ class ProductsController < ApplicationController
     Product.transaction do
       @product = current_user.products.create(product_params)
       type = AppConfig.cloud[:name]
-
       if type == "AWS"
         cost = ProductType.find_by_name(params[:product][:product_type]).cost_per_month
       elsif type == "DigitalOcean"
         cost = SizeType.find_by_size_id(params[:product][:size_type]).cost_per_month
       end
       @product.update_attributes(web_name: type, cost: cost, status: 'pending')
-
       paypal_url = @product.paypal_url
       if paypal_url
         redirect_to paypal_url
@@ -57,7 +55,14 @@ class ProductsController < ApplicationController
           subscription.update_attributes(status: "expired")
         end
       elsif product.web_name == "DigitalOcean"
-        #to be verified after testing
+        response = product.send(:destroy_droplet)
+        if response.status == "OK"
+          ppr = PayPal::Recurring.new(:profile_id => product.profileId)
+          ppr.cancel
+          product.update_attributes(status: 'terminated')
+          subscription = Subscription.find_by_product_id(params[:id])
+          subscription.update_attributes(status: "expired")
+        end
       end
 
     end
@@ -74,7 +79,6 @@ class ProductsController < ApplicationController
         subscript = product.user.subscriptions.where(sub_tran: params[:txn_id])
         unless !subscript.empty?
           unless product.product_id
-
             if product.web_name == "AWS"
               product_type = product[:product_type]
               size_type = nil

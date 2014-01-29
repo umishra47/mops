@@ -25,10 +25,17 @@ module AwsAction
 
   def launch_droplet
     begin
-      Digitalocean::Droplet.create({name: name, size_id: size_type, image_id: image_id.to_i, region_id: region_id})
+      response = Digitalocean::Droplet.create({name: name, size_id: size_type, image_id: image_id.to_i, region_id: region_id})
+      sleep 15
+      response1 = Digitalocean::Droplet.retrieve(response.droplet.id)
+      update_attributes({product_id: response.droplet.id, launch_time: DateTime.now, cost: cost, dns_name: response1.droplet.ip_address})
     rescue
       false
     end
+  end
+  
+  def destroy_droplet
+    response = Digitalocean::Droplet.destroy(product_id.to_i)
   end
 
 end

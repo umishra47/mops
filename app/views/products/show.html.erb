@@ -43,7 +43,11 @@
 								</div>
 								<div class="row-fluid">
 									<ul class="unstyled spaced">
-										<li><i class="icon-caret-right blue"></i> Instance Type  :  <b class="red"><%= @product.product_type %></b></li>
+										<%if AppConfig.cloud[:name] == "AWS"%>
+											<li><i class="icon-caret-right blue"></i> Instance Type  :  <b class="red"><%= @product.product_type %></b></li>
+										<%elsif AppConfig.cloud[:name] == "DigitalOcean"%>
+											<li><i class="icon-caret-right blue"></i> Size Type  :  <b class="red"><%= SizeType.find_by_size_id(@product.size_type).name %></b></li>
+										<%end%>
 										<li><i class="icon-caret-right blue"></i> AMI ID  :  <b class="red"><%= @product.image_id %></b></li>
 										<li><i class="icon-caret-right blue"></i> Status  :  <b class="red"><%= @product.status %></b></li>
 										<li><i class="icon-caret-right blue"></i> DNS Name  :  <b class="red"><%= @product.dns_name %></b></li>

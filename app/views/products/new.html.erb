@@ -34,9 +34,10 @@
 									<div class="control-group">
 										<label class="control-label lighter block green" for="name">Name your Instance</label>
 										<div class="controls">
-											<span class="span6 input-icon input-icon-right">
-												<%= f.text_field :name, class: "span12", id: "name", required: true  %>
+											<span class="span4 input-icon input-icon-right">
+												<%= f.text_field :name, class: "span12", id: "name", required: true, maxlength:"128" %>
 											</span>
+											<label class="lighter block red">(a-z, A-Z, 0-9)</label>
 										</div>
 									</div>
 
@@ -71,7 +72,7 @@
 																<td class="center">
 																	<label><input type="radio" name="product[size_type]" class="product_type" value="<%= it.size_id %>"><span class="lbl"></span></label>
 																</td>
-																<td><%= it.size_id %></td>
+																<td><%= it.name %></td>
 																<td class="hidden-phone"><%= it.memory %></td>
 																<td><%= it.cost %></td>
 															</tr>
@@ -83,9 +84,9 @@
 									</div>
 
 									<div class="control-group">
-										<label class="control-label lighter block green" for="">Select AMI</label>
+										<label class="control-label lighter block green" for="">Select Image</label>
 										<div class="controls">
-											<span class="span6 input-icon input-icon-right">
+											<span class="span4 input-icon input-icon-right">
 												<%if AppConfig.cloud[:name] == "AWS"%>
 													<%= f.select :image_id, AppConfig.ami_ids,{}, {class: "span12", id: "ami"} %>
 												<%elsif%>
@@ -99,7 +100,7 @@
 										<div class="control-group">
 											<label class="control-label lighter block green" for="">Select Region</label>
 											<div class="controls">
-												<span class="span6 input-icon input-icon-right">
+												<span class="span4 input-icon input-icon-right">
 														<%= f.select :region_id, RegionType.all.map{|cc| [cc.name, cc.region_id]},{}, {class: "span12", id: "ami"} %>
 												</span>
 											</div>
@@ -138,5 +139,12 @@
 				$('.btn_launch').attr("style", "padding-top:7px;padding-bottom:8px;");
 			};
 		};
+		$("#name").keypress(function(event){
+			if (event.altKey == false && event.ctrlKey == false)
+				if (!((event.keyCode >= 48 && event.keyCode <= 57 && event.shiftKey== false) ||
+					(event.keyCode >= 65 && event.keyCode <= 90) ||
+					(event.keyCode >= 97 && event.keyCode <= 122) || event.keyCode == 8 || event.keyCode == 46))
+					event.preventDefault();
+		});
 		</script>
 <% end %>

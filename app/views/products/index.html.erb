@@ -9,8 +9,8 @@
 
 <% content_for :header do %>
 	<div class="page-header position-relative">
-		<h1 style="display:inline;float:left;">My Products</h1>
-	<%= link_to "Launch New Instance", launch_product_path, class: "btn btn-small btn-primary", style: "left:71%;"%>
+		<%= link_to "Launch New Instance", launch_product_path, class: "btn btn-primary btn-small", style: "float: right;" %>
+		<h1>My Products</h1>
 	</div><!--/page-header-->
 <% end %>
 
@@ -21,7 +21,11 @@
 				<tr>
 					<th>Name</th>
 					<th class='hidden-480'>Instance ID</th>
-					<th class='hidden-phone'>Instance Type</th>
+					<%if AppConfig.cloud[:name] == "AWS"%>
+						<th class='hidden-phone'>Instance Type</th>
+					<%elsif AppConfig.cloud[:name] == "DigitalOcean"%>
+						<th class='hidden-phone'>Size Type</th>
+					<%end%>
 					<th>Launch Time</th>
 					<th class='hidden-480'>Cost</th>
 					<th class='hidden-480'>Status</th>
@@ -34,7 +38,11 @@
 					<tr>
 						<td><%= instance.name %></td>
 						<td class='hidden-480'><%= instance.product_id %></td>
-						<td class='hidden-phone'><%= instance.product_type %></td>
+						<%if AppConfig.cloud[:name] == "AWS"%>
+							<td class='hidden-phone'><%= instance.product_type %></td>
+						<%elsif AppConfig.cloud[:name] == "DigitalOcean"%>
+							<td class='hidden-phone'><%= SizeType.find_by_size_id(instance.size_type).name %></td>
+						<%end%>
 						<td><%= instance.launch_time %></td>
 						<td class='hidden-480'><%= instance.cost %></td>
 						<% inst_state = instance.status || "unknown" %>

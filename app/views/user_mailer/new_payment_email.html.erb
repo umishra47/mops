@@ -9,7 +9,7 @@
       <% if @product.web_name == "AWS" %>
         Your subscription for instance <%= @product.name + ' (' + @product.product_type + ')' %> is renewed. You have been auto-charged with $<%= number_with_precision(@product.cost_per_month, precision: 2) %> for the same.
       <% elsif @product.web_name == "DigitalOcean"%>
-        Your subscription for instance <%= @product.name + ' (' + @product.size_type + ')' %> is renewed. You have been auto-charged with $<%= number_with_precision(@product.cost_per_month, precision: 2) %> for the same.
+        Your subscription for instance <%= @product.name + ' (' + SizeType.find_by_size_id(@product.size_type).name + ')' %> is renewed. You have been auto-charged with $<%= number_with_precision(@product.cost_per_month, precision: 2) %> for the same.
       <%end%>
     </p>
   </body>

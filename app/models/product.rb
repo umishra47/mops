@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
     if web_name == "AWS"
       val = product_type
     elsif web_name == "DigitalOcean"
-      val = size_type.to_s
+      val = SizeType.find_by_size_id(size_type).name
     end
     values = {
       :business => AppConfig.business_email,
