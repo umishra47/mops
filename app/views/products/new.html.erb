@@ -95,17 +95,6 @@
 											</span>
 										</div>
 									</div>
-									<%if AppConfig.cloud[:name] == "DigitalOcean"%>
-	
-										<div class="control-group">
-											<label class="control-label lighter block green" for="">Select Region</label>
-											<div class="controls">
-												<span class="span4 input-icon input-icon-right">
-														<%= f.select :region_id, RegionType.all.map{|cc| [cc.name, cc.region_id]},{}, {class: "span12", id: "ami"} %>
-												</span>
-											</div>
-										</div>
-									<% end%>
 									<div class="control-group">
 										<label class="control-label" for="ami"></label>
 										<div class="controls">

@@ -60,8 +60,8 @@ class ProductsController < ApplicationController
           ppr = PayPal::Recurring.new(:profile_id => product.profileId)
           ppr.cancel
           product.update_attributes(status: 'terminated')
-          subscription = Subscription.find_by_product_id(params[:id])
-          subscription.update_attributes(status: "expired")
+          subscription = Subscription.where(product_id: product.id, status: "active")
+          subscription.first.update_attributes(status: "expired") unless subscription.empty?
         end
       end
 
@@ -87,9 +87,11 @@ class ProductsController < ApplicationController
               size_type = product[:size_type]
               product_type = nil
               product.send(:launch_droplet)
-            end 
+            end
             end_date = product.launch_time + 30.days
             notify_date = end_date - 7.days
+
+            #create subscription
             product.user.subscriptions.create(
              web_type: product.web_name, image_id: product.image_id,
              product_type: product_type, instance_id: product.product_id, sub_tran: params[:txn_id],
@@ -101,6 +103,12 @@ class ProductsController < ApplicationController
           else
             end_date = Date.today + 30.days
             notify_date = end_date - 7.days
+
+            #Expire old subscription 
+            prev_sub = Subscription.where(product_id: product.id, status: "active")
+            prev_sub.first.update_attributes(status: 'expired') unless prev_sub.empty?
+
+            #create new subscription
             product.user.subscriptions.create(
               web_type: product.web_name, image_id: product.image_id, product_type: product_type,
               instance_id: product.product_id, sub_tran: params[:txn_id], size_type: size_type,
