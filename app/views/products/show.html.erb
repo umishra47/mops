@@ -1,11 +1,17 @@
+<% content_for :header do %>
+	Server Details
+<% end %>
+
 <% content_for :breadcrumbs do %>
-	<div id="breadcrumbs">
-		<ul class="breadcrumb">
-			<li><i class="icon-home"></i><a href="<%= root_path %>">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-			<li><a href="<%= servers_path %>">My Servers</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-			<li class="active"><%= @product.name %></li>
-		</ul>
-	</div>
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="/">
+		Home </a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li>
+		<%= @product.name.try(:humanize) %>
+	</li>
 <% end %>
 <div class="space-6"></div>
 
@@ -66,8 +72,7 @@
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
 		window.onload = function() {
-			$('li#nav-elements').addClass('active open');
-			$('li#nav-elements-instances').addClass('active');
+			$('li#nav-elements-server').addClass('active');
 		};
 	</script>
 <% end %>

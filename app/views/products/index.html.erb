@@ -1,19 +1,17 @@
-<% content_for :breadcrumbs do %>
-	<div id="breadcrumbs">
-		<ul class="breadcrumb">
-			<li><i class="icon-home"></i><a href="<%= root_path %>">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-			<li class="active">My Servers<span class="divider"></span></li>
-		</ul>
-	</div>
-<% end %>
-
 <% content_for :header do %>
-	<div class="page-header position-relative">
-		<%= link_to "Launch New Server", launch_server_path, class: "btn btn-primary btn-small", style: "float: right;" %>
-		<h1>My Servers</h1>
-	</div><!--/page-header-->
+	My Servers
 <% end %>
 
+<% content_for :breadcrumbs do %>
+	<li class="btn-group">
+		<a class="btn blue" href="<%= launch_server_path %>" style="color:white;">Launch Server</a>
+	</li>
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="/">
+		Home </a>
+	</li>
+<% end %>
 <div class="row-fluid">
 	<span class="span12">
 		<table id="table_report" class="table table-striped table-bordered table-hover">
@@ -74,14 +72,12 @@
 </div>
 
 <% content_for :page_scripts do %>
-	<%= javascript_include_tag "jquery.dataTables.min", "jquery.dataTables.bootstrap" %>
 <% end %>
 
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
 		window.onload = function() {
-			$('li#nav-elements').addClass('active open');
-			$('li#nav-elements-instances').addClass('active');
+			$('li#nav-elements-server').addClass('active');
 		};
 	</script>
 <% end %>

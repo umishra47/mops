@@ -7,7 +7,6 @@ LoginApp::Application.routes.draw do
   get "authentication/destroy"
   resources :servers, controller: "products"
 
-
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords"}
   devise_scope :user do
     match 'login', to: "users/sessions#new", via: [:get, :post], as: "login"
@@ -16,7 +15,7 @@ LoginApp::Application.routes.draw do
     get '/auth/failure' => "users/sessions#new"
     get 'return' => "users/sessions#new"
   end
-  root 'welcome#index'
+  root 'products#index'
   match '/auth/:provider/callback' => 'authentication#create', via: [:get, :post]
   get "/launch_server" => "products#new", as: :launch_server
   get "/transaction_completed" => "products#show"
