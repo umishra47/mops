@@ -5,7 +5,7 @@ LoginApp::Application.routes.draw do
   get "authentication/index"
   get "authentication/create"
   get "authentication/destroy"
-  resources :products
+  resources :servers, controller: "products"
 
 
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords"}
@@ -18,7 +18,7 @@ LoginApp::Application.routes.draw do
   end
   root 'welcome#index'
   match '/auth/:provider/callback' => 'authentication#create', via: [:get, :post]
-  get "/launch_product" => "products#new", as: :launch_product
+  get "/launch_server" => "products#new", as: :launch_server
   get "/transaction_completed" => "products#show"
   match "/transaction_payment" => "products#transaction_details", via: [:get, :post]
 

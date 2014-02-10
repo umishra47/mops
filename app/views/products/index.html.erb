@@ -2,15 +2,15 @@
 	<div id="breadcrumbs">
 		<ul class="breadcrumb">
 			<li><i class="icon-home"></i><a href="<%= root_path %>">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-			<li class="active">My Products<span class="divider"></span></li>
+			<li class="active">My Servers<span class="divider"></span></li>
 		</ul>
 	</div>
 <% end %>
 
 <% content_for :header do %>
 	<div class="page-header position-relative">
-		<%= link_to "Launch New Instance", launch_product_path, class: "btn btn-primary btn-small", style: "float: right;" %>
-		<h1>My Products</h1>
+		<%= link_to "Launch New Server", launch_server_path, class: "btn btn-primary btn-small", style: "float: right;" %>
+		<h1>My Servers</h1>
 	</div><!--/page-header-->
 <% end %>
 
@@ -20,9 +20,9 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th class='hidden-480'>Instance ID</th>
+					<th class='hidden-480'>Server ID</th>
 					<%if AppConfig.cloud[:name] == "AWS"%>
-						<th class='hidden-phone'>Instance Type</th>
+						<th class='hidden-phone'>Server Type</th>
 					<%elsif AppConfig.cloud[:name] == "DigitalOcean"%>
 						<th class='hidden-phone'>Size Type</th>
 					<%end%>
@@ -55,10 +55,10 @@
 							<div class="inline position-relative">
 								<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 									<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-										<li><a href="<%= product_path(instance) %>" class="btn btn-mini btn-info" data-rel="tooltip" title="View Details"><i class="icon-list icon-only"></i></a></li>
+										<li><a href="<%= server_path(instance) %>" class="btn btn-mini btn-info" data-rel="tooltip" title="View Details"><i class="icon-list icon-only"></i></a></li>
 										<li>
 											<% unless inst_state == 'terminated'%>
-												<%= link_to product_path(instance),confirm: 'Are you sure?', method: :delete do %>
+												<%= link_to server_path(instance),confirm: 'Are you sure?', method: :delete do %>
 												<span class="red"><i class="icon-trash"></i></span>
 												<% end %>
 											<% end %>

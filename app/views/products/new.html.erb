@@ -1,19 +1,24 @@
 <% content_for :page_styles do %>
 	<%= stylesheet_link_tag "chosen" %>
+	<script type="text/css">
+		.hightlight-selected-item {
+			background-color: #0b6cbc;
+		}
+	</script>
 <% end %>
 
 <% content_for :breadcrumbs do %>
 	<div id="breadcrumbs">
 		<ul class="breadcrumb">
 			<li><i class="icon-home"></i><a href="<%= root_path %>">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-			<li class="active">Launch Instance<span class="divider"></span></li>
+			<li class="active">Launch Server<span class="divider"></span></li>
 		</ul>
 	</div>
 <% end %>
 
 <% content_for :header do %>
 	<div class="page-header position-relative">
-		<h1>Launch Instance</h1>
+		<h1>Launch Server</h1>
 	</div><!--/page-header-->
 <% end %>
 
@@ -28,11 +33,11 @@
 					<div class="row-fluid">
 					
 						<div class="step-content row-fluid position-relative">
-							<%= form_for @product, html: {id: 'validation-form', class: 'form-horizontal'} do |f| %>
+							<%= form_for @product, url: servers_path, html: {id: 'validation-form', class: 'form-horizontal'} do |f| %>
 								<div class="step-pane active">
 
 									<div class="control-group">
-										<label class="control-label lighter block green" for="name">Name your Instance</label>
+										<label class="control-label lighter block green" for="name">Name your Server</label>
 										<div class="controls">
 											<span class="span4 input-icon input-icon-right">
 												<%= f.text_field :name, class: "span12", id: "name", required: true, maxlength:"128" %>
@@ -42,44 +47,33 @@
 									</div>
 
 									<div class="control-group">
-										<label class="control-label lighter block green" for="image">Select Instance Type</label>
+										<label class="control-label lighter block green" for="image">Select Server Type</label>
 										<div class="controls">
-											<table id="table_bug_report" class="table table-striped table-bordered table-hover">
-												<thead>
+											<%if AppConfig.cloud[:name] == "AWS"%>
+												<% ProductType.all.each do |it| %>
 													<tr>
-														<th></th>
-														<th><i class="icon-list-alt"></i> Type</th>
-														<th class="hidden-phone"><i class="icon-hdd"></i> Memory</th>
-														<th><i class="icon-briefcase"></i> Cost</th>
+														<td class="center">
+															<label><input type="radio" name="product[product_type]" class="product_type" value="<%= it.name %>"><span class="lbl"></span></label>
+														</td>
+														<td><%= it.name %></td>
+														<td class="hidden-phone"><%= it.memory %></td>
+														<td><%= it.cost %></td>
 													</tr>
-												</thead>
-
-												<tbody>
-													<%if AppConfig.cloud[:name] == "AWS"%>
-														<% ProductType.all.each do |it| %>
-															<tr>
-																<td class="center">
-																	<label><input type="radio" name="product[product_type]" class="product_type" value="<%= it.name %>"><span class="lbl"></span></label>
-																</td>
-																<td><%= it.name %></td>
-																<td class="hidden-phone"><%= it.memory %></td>
-																<td><%= it.cost %></td>
-															</tr>
-														<% end %>
-													<% elsif AppConfig.cloud[:name] == "DigitalOcean"%>
-														<% SizeType.all.each do |it| %>
-															<tr>
-																<td class="center">
-																	<label><input type="radio" name="product[size_type]" class="product_type" value="<%= it.size_id %>"><span class="lbl"></span></label>
-																</td>
-																<td><%= it.name %></td>
-																<td class="hidden-phone"><%= it.memory %></td>
-																<td><%= it.cost %></td>
-															</tr>
-														<% end %>
-													<%end%>
-												</tbody>
-											</table>
+												<% end %>
+											<% elsif AppConfig.cloud[:name] == "DigitalOcean"%>
+												<div id="radio-button-wrapper">
+													<% SizeType.all.each do |it| %>
+														<input type="radio" name="product[size_type]" class="product_type" value="<%= it.size_id %>" style="display:none;" />
+														<div class="well span3 image-radio" id="<%= it.name %>" style="margin-left:0;margin-right:15px;cursor:pointer;">
+															<center><label style="font-size:20px;"><b><%= it.name %></b></label><center>
+															<center><%= it.cpu %> CPU unit(s)</center>
+															<center><%= it.memory %> Memory</center>
+															<center><%= it.disk %> GB SSD Disk</center>
+															<center><%= it.cost %></center>
+														</div>
+													<% end %>
+												</div>
+											<%end%>
 										</div>
 									</div>
 
@@ -87,11 +81,11 @@
 										<label class="control-label lighter block green" for="">Select Image</label>
 										<div class="controls">
 											<span class="span4 input-icon input-icon-right">
-												<%if AppConfig.cloud[:name] == "AWS"%>
+												<% if AppConfig.cloud[:name] == "AWS" %>
 													<%= f.select :image_id, AppConfig.ami_ids,{}, {class: "span12", id: "ami"} %>
-												<%elsif%>
+												<% elsif %>
 													<%= f.select :image_id, AppConfig.image_ids,{}, {class: "span12", id: "images"} %>
-												<% end%>
+												<% end %>
 											</span>
 										</div>
 									</div>
@@ -100,7 +94,7 @@
 										<div class="controls">
 											<span class="span6 input-icon input-icon-right">
 												
-												<%= f.submit "   Launch", class: "btn btn-success btn_launch" %>
+												<%= f.submit "   Launch", class: "btn btn-success btn_launch", id: "loading-btn", :"data-loading-text" => "Loading..." %>
 												<%= link_to "Cancel", :back, class: "btn", style: "width:65px;"%>
 											
 											</span>
@@ -135,5 +129,14 @@
 					(event.keyCode >= 97 && event.keyCode <= 122) || event.keyCode == 8 || event.keyCode == 46))
 					event.preventDefault();
 		});
+		$("div.image-radio").click(function(){
+			$("div.image-radio").removeClass('hightlight-selected-item');
+			$('input.product_type').removeAttr("checked");
+			$(this).prev('input.product_type').prop("checked", "checked");
+			$(this).addClass('hightlight-selected-item');
+		});
+		$hightlight_div = function($element) {
+			
+		};
 		</script>
 <% end %>

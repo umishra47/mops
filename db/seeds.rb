@@ -12,9 +12,9 @@ ProductType.create(name: 'm1.small', memory: 1.7, cost_per_month: 70)
 ProductType.create(name: 'm1.medium', memory: 3.75, cost_per_month: 135)
 
 SizeType.delete_all
-SizeType.create(size_id: 63, name: 'micro', disk: 30, memory: 1, cpu: 1, cost_per_month: 20.0)
-SizeType.create(size_id: 62, name: 'small', disk: 40, memory: 2, cpu: 2, cost_per_month: 50.0)
-SizeType.create(size_id: 64, name: 'medium', disk: 60, memory: 4, cpu: 2, cost_per_month: 90.0)
+SizeType.create(size_id: 63, name: 'Basic', disk: 30, memory: 1, cpu: 1, cost_per_month: 20.0)
+SizeType.create(size_id: 62, name: 'Small', disk: 40, memory: 2, cpu: 2, cost_per_month: 50.0)
+SizeType.create(size_id: 64, name: 'Business', disk: 60, memory: 4, cpu: 2, cost_per_month: 90.0)
 
 RegionType.delete_all
 RegionType.create(region_id: 1, name: "New York 1", slug: "nyc1")

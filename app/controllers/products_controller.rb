@@ -123,7 +123,7 @@ class ProductsController < ApplicationController
         UserMailer.delete_instance(product.user, product).deliver
       end
     end
-    redirect_to products_path
+    redirect_to servers_path
   end
   
   def set_digital_ocean

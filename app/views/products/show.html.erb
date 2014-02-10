@@ -2,7 +2,7 @@
 	<div id="breadcrumbs">
 		<ul class="breadcrumb">
 			<li><i class="icon-home"></i><a href="<%= root_path %>">Home</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-			<li><a href="<%= products_path %>">My Instances</a><span class="divider"><i class="icon-angle-right"></i></span></li>
+			<li><a href="<%= servers_path %>">My Servers</a><span class="divider"><i class="icon-angle-right"></i></span></li>
 			<li class="active"><%= @product.name %></li>
 		</ul>
 	</div>
@@ -15,7 +15,7 @@
 			<div class="widget-header widget-header-large">
 				<h3 class="pull-left grey lighter position-relative grey">
 					<i class="icon-tasks"></i>
-					Product Details
+					Server Details
 				</h3>
 			</div>
 
@@ -30,7 +30,7 @@
 								<div class="row-fluid">
 									<ul class="unstyled spaced">
 										<li><i class="icon-caret-right blue"></i> Name  :  <b class="red"><%= @product.name %></b></li>
-										<li><i class="icon-caret-right blue"></i> Instance ID  :  <b class="red"><%= @product.product_id %></b></li>
+										<li><i class="icon-caret-right blue"></i> Server ID  :  <b class="red"><%= @product.product_id %></b></li>
 										<li><i class="icon-caret-right blue"></i> Launch Time  :  <b class="red"><%= @product.launch_time %></b></li>
 										<li><i class="icon-caret-right blue"></i> Cost  :  <b class="red"><%= @product.cost.to_s %></b></li>
 									</ul>
@@ -44,11 +44,11 @@
 								<div class="row-fluid">
 									<ul class="unstyled spaced">
 										<%if AppConfig.cloud[:name] == "AWS"%>
-											<li><i class="icon-caret-right blue"></i> Instance Type  :  <b class="red"><%= @product.product_type %></b></li>
+											<li><i class="icon-caret-right blue"></i> Server Type  :  <b class="red"><%= @product.product_type %></b></li>
 										<%elsif AppConfig.cloud[:name] == "DigitalOcean"%>
 											<li><i class="icon-caret-right blue"></i> Size Type  :  <b class="red"><%= SizeType.find_by_size_id(@product.size_type).name %></b></li>
 										<%end%>
-										<li><i class="icon-caret-right blue"></i> AMI ID  :  <b class="red"><%= @product.image_id %></b></li>
+										<li><i class="icon-caret-right blue"></i> Image ID  :  <b class="red"><%= @product.image_id %></b></li>
 										<li><i class="icon-caret-right blue"></i> Status  :  <b class="red"><%= @product.status %></b></li>
 										<li><i class="icon-caret-right blue"></i> DNS Name  :  <b class="red"><%= @product.dns_name %></b></li>
 									</ul>
@@ -61,3 +61,13 @@
 		</div>
 	</div>
 </div>
+
+
+<% content_for :inline_scripts do %>
+	<script type="text/javascript">
+		window.onload = function() {
+			$('li#nav-elements').addClass('active open');
+			$('li#nav-elements-instances').addClass('active');
+		};
+	</script>
+<% end %>
