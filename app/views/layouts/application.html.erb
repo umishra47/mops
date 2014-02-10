@@ -21,6 +21,10 @@
 		<%= stylesheet_link_tag "bootstrap.min", media: "all" %>
 		<%= stylesheet_link_tag "uniform.default.min", media: "all" %>
 		<!-- END GLOBAL MANDATORY STYLES -->
+		
+		<!-- BEGIN PAGE LEVEL STYLES -->
+		<%= stylesheet_link_tag "toastr.min.css", media: "all" %>
+		<!-- END PAGE LEVEL SCRIPTS -->
 
 		<!-- BEGIN THEME STYLES -->
 		<%= stylesheet_link_tag "style-metronic", media: "all" %>
@@ -151,12 +155,6 @@
 					<!-- BEGIN PAGE HEADER-->
 					<div class="row">
 						<div class="col-md-12">
-							<% flash.each do |type, message| %>
-								<%= content_tag :div, class: flash_class(type) do %>
-									<button type="button" class="close" data-dismiss="alert">&times;</button>
-									<%= message %>
-								<% end %>
-							<% end %>
 							<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 							<h3 class="page-title">
 								<%= yield :header %>
@@ -208,6 +206,7 @@
 		<%= javascript_include_tag "jquery.blockui.min" %>
 		<%= javascript_include_tag "jquery.cokie.min" %>
 		<%= javascript_include_tag "jquery.uniform.min" %>
+		<%= javascript_include_tag "toastr.min.js" %>
 		<%= javascript_include_tag "app" %>
 		<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 		<!-- END CORE PLUGINS -->
@@ -218,6 +217,13 @@
 		<script>
 			jQuery(document).ready(function() {
 				App.init();
+				<% flash.each do |type, message| %>
+					<% if type == :notice %>
+						toastr.success("<%= message%>");
+					<% else %>
+						toastr.error("<%= message%>");
+					<% end %>
+				<% end %>
 			});
 		</script>
 		<script type="text/javascript">

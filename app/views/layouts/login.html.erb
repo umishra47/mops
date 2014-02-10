@@ -24,7 +24,8 @@
 
 		<!-- BEGIN PAGE LEVEL STYLES -->
 		<%= stylesheet_link_tag "select2_metro", media: "all" %>
-		<!-- END PAGE LEVEL SCRIPTS -->'
+		<%= stylesheet_link_tag "toastr.min.css", media: "all" %>
+		<!-- END PAGE LEVEL SCRIPTS -->
 
 		<!-- BEGIN THEME STYLES -->
 		<%= stylesheet_link_tag "style-metronic", media: "all" %>
@@ -50,8 +51,7 @@
 		<!-- BEGIN LOGIN -->
 		<div class="content">
 			<% flash.each do |type, message| %>
-				<%= content_tag :div, class: flash_class(type) do %>
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<%= content_tag :div, class: "hidden", id: "message" do %>
 					<%= message %>
 				<% end %>
 			<% end %>
@@ -61,7 +61,6 @@
 
 		<!-- BEGIN COPYRIGHT -->
 		<div class="copyright">
-			 2013 &copy; Metronic. Admin Dashboard Template.
 		</div>
 		<!-- END COPYRIGHT -->
 
@@ -83,6 +82,7 @@
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<%= javascript_include_tag "jquery.validate.min" %>
 		<%= javascript_include_tag "select2.min" %>
+		<%= javascript_include_tag "toastr.min.js" %>
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
 		<%= javascript_include_tag "app" %>
@@ -91,6 +91,13 @@
 		<script>
 				jQuery(document).ready(function() {
 					App.init();
+					<% flash.each do |type, message| %>
+						<% if type == :notice %>
+							toastr.success("<%= message%>");
+						<% else %>
+							toastr.error("<%= message%>");
+						<% end %>
+					<% end %>
 				});
 			</script>
 		<!-- END JAVASCRIPTS -->

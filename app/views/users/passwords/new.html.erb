@@ -1,5 +1,5 @@
 <!-- BEGIN FORGOT PASSWORD FORM -->
-<form class="forget-form" action="index.html" method="post">
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "forget-form" }) do |f| %>
 	<h3>Forget Password ?</h3>
 	<p>
 		 Enter your e-mail address below to reset your password.
@@ -7,15 +7,15 @@
 	<div class="form-group">
 		<div class="input-icon">
 			<i class="fa fa-envelope"></i>
-			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
+			<%= f.email_field :email, :autofocus => true, :class => "form-control placeholder-no-fix", :placeholder => "Email", :required => true %>
 		</div>
 	</div>
-	<div class="form-actions">
-		<button type="button" id="back-btn" class="btn">
-		<i class="m-icon-swapleft"></i> Back </button>
-		<button type="submit" class="btn green pull-right">
+
+<div class="form-actions">
+	<a href=<%= login_path %> class="btn default" id="back-btn"> <i class="m-icon-swapleft m-icon"></i> Back </a>
+	<button type="submit" class="btn green pull-right">
 		Submit <i class="m-icon-swapright m-icon-white"></i>
-		</button>
-	</div>
-</form>
+	</button>
+</div>
+<% end %>
 <!-- END FORGOT PASSWORD FORM -->
