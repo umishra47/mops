@@ -57,8 +57,6 @@ GEM
       multipart-post (~> 1.2.0)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
-    font-awesome-rails (3.2.1.3)
-      railties (>= 3.2, < 5.0)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
@@ -178,7 +176,6 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   digitalocean
-  font-awesome-rails
   jbuilder (~> 1.2)
   jquery-rails
   omniauth
