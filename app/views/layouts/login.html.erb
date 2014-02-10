@@ -1,78 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "MOPS" %></title>
-    <%= csrf_meta_tags %>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+	<!-- BEGIN HEAD -->
+	<head>
+		<meta charset="utf-8"/>
+		<title>Mops</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+		<meta content="Servers" name="description"/>
+		<meta content="enbake" name="author"/>
+		<meta name="MobileOptimized" content="320">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
-    <![endif]-->
-    <!-- basic styles -->
-    	<%= stylesheet_link_tag "application", :media => "all" %>
+		<%= csrf_meta_tags %>
 
-    <!-- For third-generation iPad with high-resolution Retina display: -->
-    <!-- Size should be 144 x 144 pixels -->
-    <%#= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+		<!-- BEGIN GLOBAL MANDATORY STYLES -->
+		<%= stylesheet_link_tag "font-awesome.min", media: "all" %>
+		<%= stylesheet_link_tag "bootstrap.min", media: "all" %>
+		<%= stylesheet_link_tag "uniform.default.min", media: "all" %>
+		<!-- END GLOBAL MANDATORY STYLES -->
 
-    <!-- For iPhone with high-resolution Retina display: -->
-    <!-- Size should be 114 x 114 pixels -->
-    <%#= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+		<!-- BEGIN PAGE LEVEL STYLES -->
+		<%= stylesheet_link_tag "select2_metro", media: "all" %>
+		<!-- END PAGE LEVEL SCRIPTS -->'
 
-    <!-- For first- and second-generation iPad: -->
-    <!-- Size should be 72 x 72 pixels -->
-    <%#= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+		<!-- BEGIN THEME STYLES -->
+		<%= stylesheet_link_tag "style-metronic", media: "all" %>
+		<%= stylesheet_link_tag "style", media: "all" %>
+		<%= stylesheet_link_tag "style-responsive", media: "all" %>
+		<%= stylesheet_link_tag "plugins", media: "all" %>
+		<%= stylesheet_link_tag "light", media: "all" %>
+		<%= stylesheet_link_tag "login", media: "all" %>
+		<%= stylesheet_link_tag "custom", media: "all" %>
+		<!-- END THEME STYLES -->
+		<link rel="shortcut icon" href="favicon.ico"/>
+	</head>
 
-    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <!-- Size should be 57 x 57 pixels -->
-    <%#= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+	<!-- BEGIN BODY -->
+	<body class="login">
 
-    <!-- For all other devices -->
-    <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.png', :rel => 'shortcut icon' %>
+		<!-- BEGIN LOGO -->
+		<div class="logo">
+			<%= image_tag "logo-big.png", alt: "" %>
+		</div>
+		<!-- END LOGO -->
 
-    <%= javascript_include_tag "application" %>
-  </head>
-  <body class="login-layout">
-	
-		<div class="container-fluid" id="main-container">
-			<div id="main-content">
-				<div class="row-fluid" style="padding-top:3%;">
-					<div class="span12">
-						
-						<div class="login-container">
-						
-						<div class="row-fluid">
-							<div class="center">
-								<h1><i class=" icon-cloud white"></i><span class="white"> MOPS</span></h1>
-							</div>
-						</div>
-						
-						<div class="space-6"></div>
-						
-						<div class="row-fluid">
-						
-						<div class="position-relative">
-						
-						    <%= yield %>
-						
-						</div><!--/position-relative-->
-							
-						</div>
-						
-						
-						</div>
+		<!-- BEGIN LOGIN -->
+		<div class="content">
+			<% flash.each do |type, message| %>
+				<%= content_tag :div, class: flash_class(type) do %>
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<%= message %>
+				<% end %>
+			<% end %>
+			<%= yield %>
+		</div>
+		<!-- END LOGIN -->
 
+		<!-- BEGIN COPYRIGHT -->
+		<div class="copyright">
+			 2013 &copy; Metronic. Admin Dashboard Template.
+		</div>
+		<!-- END COPYRIGHT -->
 
-					</div><!--/span-->
-				</div><!--/row-->
-			</div>
-		</div><!--/.fluid-container-->
-
-<!-- basic scripts -->
-		<%= javascript_include_tag "application" %>
+		<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+		<!-- BEGIN CORE PLUGINS -->
+		<!--[if lt IE 9]>
+			<script src="assets/plugins/respond.min.js"></script>
+			<script src="assets/plugins/excanvas.min.js"></script> 
+			<![endif]-->
+		<%= javascript_include_tag "jquery-1.10.2.min" %>
+		<%= javascript_include_tag "jquery-migrate-1.2.1.min" %>
+		<%= javascript_include_tag "bootstrap.min" %>
+		<%= javascript_include_tag "twitter-bootstrap-hover-dropdown.min" %>
+		<%= javascript_include_tag "jquery.slimscroll.min" %>
+		<%= javascript_include_tag "jquery.blockui.min" %>
+		<%= javascript_include_tag "jquery.cokie.min" %>
+		<%= javascript_include_tag "jquery.uniform.min" %>
+		<!-- END CORE PLUGINS -->
+		<!-- BEGIN PAGE LEVEL PLUGINS -->
+		<%= javascript_include_tag "jquery.validate.min" %>
+		<%= javascript_include_tag "select2.min" %>
+		<!-- END PAGE LEVEL PLUGINS -->
+		<!-- BEGIN PAGE LEVEL SCRIPTS -->
+		<%= javascript_include_tag "app" %>
+		<%= javascript_include_tag "login" %>
+		<!-- END PAGE LEVEL SCRIPTS -->
+		<script>
+				jQuery(document).ready(function() {
+					App.init();
+				});
+			</script>
+		<!-- END JAVASCRIPTS -->
 	</body>
+	<!-- END BODY -->
 </html>
