@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129053325) do
+ActiveRecord::Schema.define(version: 20140211084027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,15 +45,17 @@ ActiveRecord::Schema.define(version: 20140129053325) do
     t.integer  "size_type"
     t.decimal  "cost"
     t.integer  "region_id"
-    t.boolean  "backups_active", default: false
+    t.boolean  "backups_active",  default: false
     t.string   "backups"
     t.string   "snapshots"
-    t.boolean  "locked",         default: false
+    t.boolean  "locked",          default: false
     t.string   "profileId"
     t.string   "dns_name"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "private_ssh_key"
+    t.text     "public_ssh_key"
   end
 
   create_table "region_types", force: true do |t|
