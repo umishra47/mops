@@ -3898,6 +3898,11 @@ Bordered form layout
   margin: 0;
 }
 
+.highlight {
+  background-color: #35aa47;
+  color: white;
+}
+
 
 /***
 Disabled Menu Link

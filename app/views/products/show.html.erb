@@ -1,10 +1,14 @@
+<% content_for :page_styles do %>
+	<%= stylesheet_link_tag "DT_bootstrap", media: "all" %>
+<% end %>
+
 <% content_for :header do %>
 	Server Details
 <% end %>
 
 <% content_for :breadcrumbs do %>
 	<li class="btn-group">
-		<%= link_to "/servers/#{@product.id}", method: :delete, confirm: "Are you sure ?", class: "btn red", style: "color:#fff;" do%>
+		<%= link_to server_path(@product),  method: :delete, action: :destroy, confirm: "Are you sure ?", class: "btn red", style: "color:#fff;" do%>
 			<i class="fa fa-trash-o"></i>Terminate
 		<% end %>
 	</li>
@@ -139,10 +143,59 @@
 		<!-- END FORM-->
 	</div>
 </div>
+<div class="portlet box green">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-reorder"></i>Subscriptions
+		</div>
+	</div>
+	<div class="portlet-body">
+		<table class="table table-striped table-bordered table-hover" id="subscribe_table">
+			<thead>
+				<tr>
+					<th >Server ID</th>
+					<th>Web Type</th>
+					<th>Product Type</th>
+					<th>Subscribed On</th>
+					<th>Renewal Date</th>
+					<th>Cost</th>
+					<th >Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% if @subscriptions %>
+					<% @subscriptions.each do |subscription|%>
+						<tr>
+							<td><%= subscription.id %></td>
+							<td><%= subscription.web_type %></td>
+							<td><%= subscription.product_type %></td>
+							<td><%= subscription.start_date %></td>
+							<td><%= subscription.notify_date %></td>
+							<td><%= subscription.end_date %></td>
+							<td><%= subscription.status%></td>
+						</tr>
+					<%end%>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
 		window.onload = function() {
 			$('li#nav-elements-server').addClass('active');
+			var oTable = $('#subscribe_table').dataTable({
+			"aoColumnDefs" : [{
+				"bSortable" : true,
+				"aTargets" : []
+			}],
+			"aaSorting" : [[0, 'asc']],
+			"aLengthMenu" : [[5, 15, 20, -1], [5, 15, 20, "All"] // change per page values here
+			],
+			// set the initial value
+			"iDisplayLength" : 10,
+		});
 		};
+		
 	</script>
 <% end %>

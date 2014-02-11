@@ -1,32 +1,24 @@
-<div id="signup-box" class="visible widget-box no-border">
+<%= form_for(:user, as: resource_name, url: add_mail_path, class: "register-form") do |f| %>
+	<h3>New User Registration</h3>
+	<p>
+		Please Enter your Twitter Email:
+	</p>
+	<div class="form-group">
+		<label class="control-label visible-ie8 visible-ie9">
+			Email
+		</label>
+		<div class="input-icon">
+			<i class="fa fa-envelope"></i>
+			<%= f.email_field :email, class: "form-control placeholder-no-fix", placeholder: "Email", required: true %>
+		</div>
+	</div>
+	<div class="form-actions">
+		<!--button id="register-back-btn" type="button" class="btn"-->
+		<a href=<%= login_path %> class="btn default"> <i class="m-icon-swapleft"></i> Back to login </a>
+		<button type="submit" id="register-submit-btn" class="btn green pull-right">
+			Proceed <i class="m-icon-swapright m-icon-white"></i>
+		</button>
+	</div>
+<% end %>
 
-        <div class="widget-body">
-         <div class="widget-main">
-            <h4 class="header green lighter bigger"><i class="icon-group blue"></i>Please Enter Your Twitter Email</h4>
-            
-            <%= form_for(:user, :as => resource_name, :url => add_mail_path) do |f| %>
-                 <fieldset>
-                    <label>
-                        <span class="block input-icon input-icon-right">
-                            <%= f.email_field :email, :autofocus => true, :class => "span12", :placeholder => "Email", :required => true %>
-                            <i class="icon-envelope"></i>
-                        </span>
-                    </label>
-                    
-                    <div class="row-fluid">
-                        <button type="submit" class="span6 btn btn-small btn-success">
-                          <i class="icon-arrow-right icon-on-right"></i> Proceed
-                        </button>
-                    </div>
-                    
-                  </fieldset>
-            <% end %>
-        </div>
-        
-        <div class="toolbar center">
-            <a href=<%= root_path %> class="back-to-login-link"><i class="icon-arrow-left"></i> Back to login</a>
-        </div>
-
-     </div><!--/widget-body-->
-
-    </div><!--/signup-box-->
+	

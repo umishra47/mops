@@ -15,7 +15,9 @@ class ProductsController < ApplicationController
     else
       params_id = params[:id]
     end
-    respond_with @product = current_user.products.find(params_id)
+    @product = current_user.products.find(params_id)
+    @subscriptions = @product.subscriptions if @product
+    respond_with @product, @subscriptions
   end
 
   def new
