@@ -72,11 +72,12 @@
 						<i class="fa fa-angle-down"></i>
 						</a>
 						<ul class="dropdown-menu">
+							<!--
 							<li>
 								<a href="#"><i class="fa fa-user"></i> My Profile</a>
 							</li>
 							<li class="divider">
-							</li>
+							</li>-->
 							<li>
 								<a href="/logout"><i class="fa fa-key"></i> Log Out</a>
 							</li>
@@ -213,8 +214,7 @@
 		<!-- page specific plugin scripts -->
 		<%= yield :page_scripts %>
 
-		<%= javascript_include_tag "jquery.dataTables.min" %>
-		<%= javascript_include_tag "DT_bootstrap" %>
+		<%= javascript_include_tag "app" %>
 
 		<script>
 			jQuery(document).ready(function() {

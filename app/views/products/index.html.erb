@@ -64,7 +64,8 @@
 </table>
 
 <% content_for :page_scripts do %>
-	<%= javascript_include_tag "app" %>
+	<%= javascript_include_tag "jquery.dataTables.min" %>
+	<%= javascript_include_tag "DT_bootstrap" %>
 <% end %>
 
 <% content_for :inline_scripts do %>
