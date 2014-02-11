@@ -13,130 +13,102 @@
 		Launch Server
 	</li>
 <% end %>
-<% content_for :page_styles do %>
-	<%= stylesheet_link_tag "chosen" %>
-	<script type="text/css">
-		.hightlight-selected-item {
-			background-color: #0b6cbc;
-		}
-	</script>
-<% end %>
 
-<div class="row-fluid">
-	<div class="span12">
-		<div class="widget-box">
-			<div class="widget-header"></div>
-
-			<div class="widget-body">
-				<div class="widget-main">
-				
-					<div class="row-fluid">
-					
-						<div class="step-content row-fluid position-relative">
-							<%= form_for @product, url: servers_path, html: {id: 'validation-form', class: 'form-horizontal'} do |f| %>
-								<div class="step-pane active">
-
-									<div class="control-group">
-										<label class="control-label lighter block green" for="name">Name your Server</label>
-										<div class="controls">
-											<span class="span4 input-icon input-icon-right">
-												<%= f.text_field :name, class: "span12", id: "name", required: true, maxlength:"128" %>
-											</span>
-											<label class="lighter block red">(a-z, A-Z, 0-9)</label>
-										</div>
-									</div>
-
-									<div class="control-group">
-										<label class="control-label lighter block green" for="image">Select Server Type</label>
-										<div class="controls">
-											<%if AppConfig.cloud[:name] == "AWS"%>
-												<% ProductType.all.each do |it| %>
-													<tr>
-														<td class="center">
-															<label><input type="radio" name="product[product_type]" class="product_type" value="<%= it.name %>"><span class="lbl"></span></label>
-														</td>
-														<td><%= it.name %></td>
-														<td class="hidden-phone"><%= it.memory %></td>
-														<td><%= it.cost %></td>
-													</tr>
-												<% end %>
-											<% elsif AppConfig.cloud[:name] == "DigitalOcean"%>
-												<div id="radio-button-wrapper">
-													<% SizeType.all.each do |it| %>
-														<input type="radio" name="product[size_type]" class="product_type" value="<%= it.size_id %>" style="display:none;" />
-														<div class="well span3 image-radio" id="<%= it.name %>" style="margin-left:0;margin-right:15px;cursor:pointer;">
-															<center><label style="font-size:20px;"><b><%= it.name %></b></label><center>
-															<center><%= it.cpu %> CPU unit(s)</center>
-															<center><%= it.memory %> Memory</center>
-															<center><%= it.disk %> GB SSD Disk</center>
-															<center><%= it.cost %></center>
-														</div>
-													<% end %>
-												</div>
-											<%end%>
-										</div>
-									</div>
-
-									<div class="control-group">
-										<label class="control-label lighter block green" for="">Select Image</label>
-										<div class="controls">
-											<span class="span4 input-icon input-icon-right">
-												<% if AppConfig.cloud[:name] == "AWS" %>
-													<%= f.select :image_id, AppConfig.ami_ids,{}, {class: "span12", id: "ami"} %>
-												<% elsif %>
-													<%= f.select :image_id, AppConfig.image_ids,{}, {class: "span12", id: "images"} %>
-												<% end %>
-											</span>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="ami"></label>
-										<div class="controls">
-											<span class="span6 input-icon input-icon-right">
-												
-												<%= f.submit "   Launch", class: "btn btn-success btn_launch", id: "loading-btn", :"data-loading-text" => "Loading..." %>
-												<%= link_to "Cancel", :back, class: "btn", style: "width:65px;"%>
-											
-											</span>
-										</div>
-									</div>
-									
-								</div>
-								
-							<% end %>
+<div class="portlet box red">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-reorder"></i>Form Actions On Bottom
+		</div>
+		<div class="tools">
+			<a href="javascript:;" class="collapse"></a>
+			<a href="#portlet-config" data-toggle="modal" class="config"></a>
+			<a href="javascript:;" class="reload"></a>
+			<a href="javascript:;" class="remove"></a>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<!-- BEGIN FORM-->
+		<form action="#" class="form-horizontal">
+			<div class="form-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">Text</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" placeholder="Enter text">
+						<span class="help-block">
+							A block of help text.
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Email Address</label>
+					<div class="col-md-4">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="fa fa-envelope"></i>
+							</span>
+							<input type="email" class="form-control" placeholder="Email Address">
 						</div>
 					</div>
-
-				</div><!--/widget-main-->
-			</div><!--/widget-body-->
-		</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Password</label>
+					<div class="col-md-4">
+						<div class="input-group">
+							<input type="password" class="form-control" placeholder="Password">
+							<span class="input-group-addon">
+								<i class="fa fa-user"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Left Icon</label>
+					<div class="col-md-4">
+						<div class="input-icon">
+							<i class="fa fa-bell-o"></i>
+							<input type="text" class="form-control" placeholder="Left icon">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Right Icon</label>
+					<div class="col-md-4">
+						<div class="input-icon right">
+							<i class="fa fa-microphone"></i>
+							<input type="text" class="form-control" placeholder="Right icon">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Input With Spinner</label>
+					<div class="col-md-4">
+						<input type="password" class="form-control spinner" placeholder="Password">
+					</div>
+				</div>
+				<div class="form-group last">
+					<label class="col-md-3 control-label">Static Control</label>
+					<div class="col-md-4">
+						<p class="form-control-static">
+							email@example.com
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions fluid">
+				<div class="col-md-offset-3 col-md-9">
+					<button type="submit" class="btn blue">Submit</button>
+					<button type="button" class="btn default">Cancel</button>
+				</div>
+			</div>
+		</form>
+		<!-- END FORM-->
 	</div>
 </div>
 
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
 		window.onload = function() {
-			$('.product_type:first').attr('checked', 'checked');
 			$('li#nav-elements-launch').addClass('active');
-			if (navigator.userAgent.match(/Firefox/)) {
-				$('.btn_launch').attr("style", "padding-top:7px;padding-bottom:8px;");
-			};
 		};
-		$("#name").keypress(function(event){
-			if (event.altKey == false && event.ctrlKey == false)
-				if (!((event.keyCode >= 48 && event.keyCode <= 57 && event.shiftKey== false) ||
-					(event.keyCode >= 65 && event.keyCode <= 90) ||
-					(event.keyCode >= 97 && event.keyCode <= 122) || event.keyCode == 8 || event.keyCode == 46))
-					event.preventDefault();
-		});
-		$("div.image-radio").click(function(){
-			$("div.image-radio").removeClass('hightlight-selected-item');
-			$('input.product_type').removeAttr("checked");
-			$(this).prev('input.product_type').prop("checked", "checked");
-			$(this).addClass('hightlight-selected-item');
-		});
-		$hightlight_div = function($element) {
-			
-		};
-		</script>
+	</script>
 <% end %>

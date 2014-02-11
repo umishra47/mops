@@ -23,7 +23,8 @@
 		<!-- END GLOBAL MANDATORY STYLES -->
 		
 		<!-- BEGIN PAGE LEVEL STYLES -->
-		<%= stylesheet_link_tag "toastr.min.css", media: "all" %>
+		<%= stylesheet_link_tag "toastr.min", media: "all" %>
+		<%= yield :page_styles %>
 		<!-- END PAGE LEVEL SCRIPTS -->
 
 		<!-- BEGIN THEME STYLES -->
@@ -36,7 +37,6 @@
 		<!-- END THEME STYLES -->
 
 		<!-- page specific plugin styles -->
-		<%= yield :page_styles %>
 
 		<%= favicon_link_tag 'favicon.png', :rel => 'shortcut icon' %>
 	</head>
@@ -207,12 +207,14 @@
 		<%= javascript_include_tag "jquery.cokie.min" %>
 		<%= javascript_include_tag "jquery.uniform.min" %>
 		<%= javascript_include_tag "toastr.min.js" %>
-		<%= javascript_include_tag "app" %>
 		<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 		<!-- END CORE PLUGINS -->
 		
 		<!-- page specific plugin scripts -->
 		<%= yield :page_scripts %>
+
+		<%= javascript_include_tag "jquery.dataTables.min" %>
+		<%= javascript_include_tag "DT_bootstrap" %>
 
 		<script>
 			jQuery(document).ready(function() {

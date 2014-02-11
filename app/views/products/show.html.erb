@@ -13,62 +13,178 @@
 		<%= @product.name.try(:humanize) %>
 	</li>
 <% end %>
-<div class="space-6"></div>
-
-<div class="row-fluid">
-	<div class="span10 offset1">
-		<div class="widget-box transparent invoice-box">
-			<div class="widget-header widget-header-large">
-				<h3 class="pull-left grey lighter position-relative grey">
-					<i class="icon-tasks"></i>
-					Server Details
-				</h3>
+<div class="portlet box red">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-reorder"></i>Form Sample
+		</div>
+		<div class="tools">
+			<a href="javascript:;" class="collapse"></a>
+			<a href="#portlet-config" data-toggle="modal" class="config"></a>
+			<a href="javascript:;" class="reload"></a>
+			<a href="javascript:;" class="remove"></a>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<!-- BEGIN FORM-->
+		<form class="form-horizontal" role="form">
+			<div class="form-body">
+				<h2 class="margin-bottom-20"> View User Info - Bob Nilson </h2>
+				<h3 class="form-section">Person Info</h3>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">First Name:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									Bob
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">Last Name:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									Nilson
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">Gender:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									Male
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">Date of Birth:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									20.01.1984
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">Category:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									Category1
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">Membership:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									Free
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<h3 class="form-section">Address</h3>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">Address:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									#24 Sun Park Avenue, Rolton Str
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">City:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									New York
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">State:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									New York
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">Post Code:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									457890
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label col-md-3">Country:</label>
+							<div class="col-md-9">
+								<p class="form-control-static">
+									USA
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
 			</div>
-
-			<div class="widget-body">
-				<div class="widget-main padding-24">
-					<div class="row-fluid">
-						<div class="row-fluid">
-							<div class="span6">
-								<div class="row-fluid">
-									<div class="span12 label label-large label-info arrowed-in arrowed-right"><b>Basic Details</b></div>
-								</div>
-								<div class="row-fluid">
-									<ul class="unstyled spaced">
-										<li><i class="icon-caret-right blue"></i> Name  :  <b class="red"><%= @product.name %></b></li>
-										<li><i class="icon-caret-right blue"></i> Server ID  :  <b class="red"><%= @product.product_id %></b></li>
-										<li><i class="icon-caret-right blue"></i> Launch Time  :  <b class="red"><%= @product.launch_time %></b></li>
-										<li><i class="icon-caret-right blue"></i> Cost  :  <b class="red"><%= @product.cost.to_s %></b></li>
-									</ul>
-								</div>
-							</div><!--/span-->
-						
-							<div class="span6">
-								<div class="row-fluid">
-									<div class="span12 label label-large label-success arrowed-in arrowed-right"><b>Amazon Details</b></div>
-								</div>
-								<div class="row-fluid">
-									<ul class="unstyled spaced">
-										<%if AppConfig.cloud[:name] == "AWS"%>
-											<li><i class="icon-caret-right blue"></i> Server Type  :  <b class="red"><%= @product.product_type %></b></li>
-										<%elsif AppConfig.cloud[:name] == "DigitalOcean"%>
-											<li><i class="icon-caret-right blue"></i> Size Type  :  <b class="red"><%= SizeType.find_by_size_id(@product.size_type).name %></b></li>
-										<%end%>
-										<li><i class="icon-caret-right blue"></i> Image ID  :  <b class="red"><%= @product.image_id %></b></li>
-										<li><i class="icon-caret-right blue"></i> Status  :  <b class="red"><%= @product.status %></b></li>
-										<li><i class="icon-caret-right blue"></i> DNS Name  :  <b class="red"><%= @product.dns_name %></b></li>
-									</ul>
-								</div>
-							</div><!--/span-->
-						</div><!--row-->
+			<div class="form-actions fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="col-md-offset-3 col-md-9">
+							<button type="submit" class="btn green"><i class="fa fa-pencil"></i> Edit</button>
+							<button type="button" class="btn default">Cancel</button>
+						</div>
+					</div>
+					<div class="col-md-6">
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
+		<!-- END FORM-->
 	</div>
 </div>
-
-
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
 		window.onload = function() {
