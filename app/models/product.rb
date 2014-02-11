@@ -6,7 +6,9 @@ class Product < ActiveRecord::Base
   belongs_to :user
 
   has_many :subscriptions
-  default_scope { order('status') } 
+  default_scope { order('status') }
+
+  before_create :add_ssh_keys
 
   def paypal_url
     if web_name == "AWS"
@@ -29,6 +31,12 @@ class Product < ActiveRecord::Base
       :custom => id
     }
     "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+  
+  def add_ssh_keys
+    key = SSHKey.generate
+    self[:private_ssh_key] = key.private_key
+    self[:public_ssh_key] = key.ssh_public_key
   end
 
 end

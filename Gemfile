@@ -14,6 +14,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 gem 'omniauth'
 gem 'aws-sdk', '~> 1.0'
+gem 'sshkey'
 gem 'whenever', :require => false
 
 group :doc do
