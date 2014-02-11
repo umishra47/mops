@@ -19,7 +19,7 @@ module ApplicationHelper
      when 'launched'
        "label label-success"
      when 'terminated'
-       "label label-important"
+       "label label-info"
      else
        "label"
      end

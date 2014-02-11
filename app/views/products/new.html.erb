@@ -17,7 +17,7 @@
 <div class="portlet box red">
 	<div class="portlet-title">
 		<div class="caption">
-			<i class="fa fa-reorder"></i>Form Actions On Bottom
+			<i class="fa fa-reorder"></i>Fill Details For New Server
 		</div>
 		<div class="tools">
 			<a href="javascript:;" class="collapse"></a>
@@ -28,79 +28,88 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form action="#" class="form-horizontal">
-			<div class="form-body">
-				<div class="form-group">
-					<label class="col-md-3 control-label">Text</label>
-					<div class="col-md-4">
-						<input type="text" class="form-control" placeholder="Enter text">
-						<span class="help-block">
-							A block of help text.
-						</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 control-label">Email Address</label>
-					<div class="col-md-4">
-						<div class="input-group">
-							<span class="input-group-addon">
-								<i class="fa fa-envelope"></i>
-							</span>
-							<input type="email" class="form-control" placeholder="Email Address">
+		<%= form_for @product, url: servers_path, html: {id: 'validation-form'} do |f| %>
+		<div class="form-body">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="col-md-2 control-label">Name Your Server:</label>
+						<div class="col-md-10">
+							<%= f.text_field :name, class: "form-control", id: "name", required: true, maxlength:"128", placeholder: "Enter Name" %>
+							<span class="help-block"> (a-z, A-Z, 0-9) </span>
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-md-3 control-label">Password</label>
-					<div class="col-md-4">
-						<div class="input-group">
-							<input type="password" class="form-control" placeholder="Password">
-							<span class="input-group-addon">
-								<i class="fa fa-user"></i>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 control-label">Left Icon</label>
-					<div class="col-md-4">
-						<div class="input-icon">
-							<i class="fa fa-bell-o"></i>
-							<input type="text" class="form-control" placeholder="Left icon">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 control-label">Right Icon</label>
-					<div class="col-md-4">
-						<div class="input-icon right">
-							<i class="fa fa-microphone"></i>
-							<input type="text" class="form-control" placeholder="Right icon">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 control-label">Input With Spinner</label>
-					<div class="col-md-4">
-						<input type="password" class="form-control spinner" placeholder="Password">
-					</div>
-				</div>
-				<div class="form-group last">
-					<label class="col-md-3 control-label">Static Control</label>
-					<div class="col-md-4">
-						<p class="form-control-static">
-							email@example.com
-						</p>
-					</div>
-				</div>
+				<!--col-->
 			</div>
-			<div class="form-actions fluid">
-				<div class="col-md-offset-3 col-md-9">
-					<button type="submit" class="btn blue">Submit</button>
-					<button type="button" class="btn default">Cancel</button>
+			<!--row-->
+			<%if AppConfig.cloud[:name] == "AWS"%>
+				<% ProductType.all.each do |it| %>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="col-md-2 control-label">
+								<input type="radio" name="product[size_type]" class="product_type" value="<%= it.size_id %>" />&nbsp;<label><b><%= it.name %></b></label>
+							</div>
+							<div class="col-md-6 form-container">
+								<div class="row"><%= it.memory %></div>
+								<div class="row"><%= it.cost %></div>
+							</div>
+						</div>
+					</div>
+					<!--col-->
 				</div>
+				<!--row-->
+				<%end%>
+			<%elsif AppConfig.cloud[:name] == "DigitalOcean"%>
+				<% SizeType.all.each do |it| %>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="col-md-2 control-label">
+								<input type="radio" name="product[size_type]" class="product_type" value="<%= it.size_id %>" />&nbsp;<label><b><%= it.name %></b></label>
+							</div>
+							<div class="col-md-6 form-container">
+								<div class="row"><%= it.cpu %> CPU unit(s)</div>
+								<div class="row"><%= it.memory %> Memory</div>
+								<div class="row"><%= it.disk %> GB SSD Disk</div>
+								<div class="row"><%= it.cost %></div>
+							</div>
+						</div>
+					</div>
+					<!--col-->
+				</div>
+				<!--row-->
+				<%end%>
+			<%end%>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="col-md-2 control-label">Select Image:</label>
+						<div class="col-md-10">
+							<% if AppConfig.cloud[:name] == "AWS" %>
+								<%= f.select :image_id, AppConfig.ami_ids,{}, {class: "form-control", id: "ami"} %>
+							<% elsif %>
+								<%= f.select :image_id, AppConfig.image_ids,{}, {class: "form-control", id: "images"} %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+				<!--col-->
 			</div>
-		</form>
+			<!--row-->
+		</div>
+		<div class="form-actions fluid">
+			<div class="col-md-offset-3 col-md-9">
+				<button type="submit" class="btn blue">
+					Submit
+				</button>
+				<button type="button" class="btn default">
+					Cancel
+				</button>
+			</div>
+		</div>
+		<%end%>
 		<!-- END FORM-->
 	</div>
 </div>
