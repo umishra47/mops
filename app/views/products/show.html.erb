@@ -4,7 +4,9 @@
 
 <% content_for :breadcrumbs do %>
 	<li class="btn-group">
-		<a class="btn red" href="<%= launch_server_path %>" style="color:white;">Launch Server</a>
+		<%= link_to "/servers/#{@product.id}", method: :delete, confirm: "Are you sure ?", class: "btn red", style: "color:#fff;" do%>
+			<i class="fa fa-trash-o"></i>Terminate
+		<% end %>
 	</li>
 	<li>
 		<i class="fa fa-home"></i>
@@ -111,7 +113,9 @@
 							<label class="control-label col-md-3">Status :</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
-									<%= @product.status %>
+									<%= content_tag :span, class: instance_state_class(@product.status) do %>
+										<%= @product.status.camelize if @product.status %>
+									<% end %>
 								</p>
 							</div>
 						</div>

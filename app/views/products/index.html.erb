@@ -8,7 +8,7 @@
 
 <% content_for :breadcrumbs do %>
 	<li class="btn-group">
-		<a class="btn blue" href="<%= launch_server_path %>" style="color:white;">Launch Server</a>
+		<a class="btn blue" href="<%= launch_server_path %>" style="color:white;"><i class="fa fa-rocket"></i> Launch Server</a>
 	</li>
 	<li>
 		<i class="fa fa-home"></i>
@@ -53,7 +53,7 @@
 			<td>
 				<a href="<%= server_path(instance) %>" class="btn blue btn-xs" data-rel="tooltip" title="View Details"><i class="fa fa-list"></i></a>
 				<% if inst_state and inst_state == 'launched' and instance.product_id %>
-					<%= link_to "/servers/#{instance.id}", method: :delete, confirm: "Are you sure?", class: "btn red btn-xs" do %>
+					<%= link_to "/servers/#{instance.id}", method: :delete, confirm: "Are you sure?", class: "btn red btn-xs", title: "Terminate Server" do %>
 						<i class="fa fa-trash-o"></i>
 					<% end %>
 				<% end %>
