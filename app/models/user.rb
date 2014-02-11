@@ -12,4 +12,7 @@ class User < ActiveRecord::Base
     authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token']) 
   end
   
+  include Gravtastic
+  gravtastic
+
 end

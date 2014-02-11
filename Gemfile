@@ -16,6 +16,7 @@ gem 'omniauth'
 gem 'aws-sdk', '~> 1.0'
 gem 'sshkey'
 gem 'whenever', :require => false
+gem 'gravtastic'
 
 group :doc do
   gem 'sdoc', require: false

@@ -65,7 +65,7 @@
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<li class="dropdown user">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<%= image_tag "user.png", style: "height:29px;"%>
+						<%= image_tag current_user.gravatar_url(:size => 29)%>
 						<span class="username">
 							<%= current_user.email %>
 						</span>
