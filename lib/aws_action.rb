@@ -25,7 +25,10 @@ module AwsAction
 
   def launch_droplet
     begin
-      response = Digitalocean::Droplet.create({name: name, size_id: size_type, image_id: image_id.to_i, region_id: Hash[AppConfig.region_ids].key(image_id.to_i)})
+      ssh_key = Digitalocean::SshKey.create(name: "#{name}_#{id}", ssh_pub_key: public_ssh_key)
+      response = Digitalocean::Droplet.create({name: name, size_id: size_type, image_id: image_id.to_i, 
+                                               region_id: Hash[AppConfig.region_ids].key(image_id.to_i), 
+                                               ssh_key_ids: ssh_key.ssh_key.id.to_s})
       sleep 15
       response1 = Digitalocean::Droplet.retrieve(response.droplet.id)
       update_attributes({product_id: response.droplet.id, launch_time: DateTime.now, cost: cost, dns_name: response1.droplet.ip_address})
