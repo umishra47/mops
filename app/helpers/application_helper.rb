@@ -19,7 +19,20 @@ module ApplicationHelper
      when 'launched'
        "label label-success"
      when 'terminated'
-       "label label-info"
+       "label label-danger"
+     else
+       "label"
+     end
+  end
+  
+  def subscription_state_class(state)
+    case state
+     when 'pending'
+       "label label-warning"
+     when 'active'
+       "label label-success"
+     when 'expired'
+       "label label-danger"
      else
        "label"
      end

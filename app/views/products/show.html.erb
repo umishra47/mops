@@ -1,4 +1,5 @@
 <% content_for :page_styles do %>
+	<%= stylesheet_link_tag "select2_metro", media: "all" %>
 	<%= stylesheet_link_tag "DT_bootstrap", media: "all" %>
 <% end %>
 
@@ -8,8 +9,10 @@
 
 <% content_for :breadcrumbs do %>
 	<li class="btn-group">
-		<%= link_to server_path(@product),  method: :delete, action: :destroy, confirm: "Are you sure ?", class: "btn red", style: "color:#fff;" do%>
-			<i class="fa fa-trash-o"></i>Terminate
+		<% if @product.status == "launched" and @product.product_id %>
+			<%= link_to server_path(@product),  method: :delete, action: :destroy, confirm: "Are you sure ?", class: "btn red", style: "color:#fff;" do%>
+				<i class="fa fa-trash-o"></i>Terminate
+			<% end %>
 		<% end %>
 	</li>
 	<li>
@@ -28,7 +31,7 @@
 			<i class="fa fa-reorder"></i>Basic Details
 		</div>
 		<div class="tools">
-			<a href="<%= server_path(@product)%>" class="reload"></a>
+			<%= link_to "", server_path(@product), class: "reload" %>
 		</div>
 	</div>
 	<div class="portlet-body form">
@@ -38,7 +41,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label col-md-3">Name :</label>
+							<label class="control-label col-md-3">Name:</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
 									<%= @product.name.try(:humanize)%>
@@ -49,7 +52,7 @@
 					<!--/span-->
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label col-md-3">Server ID :</label>
+							<label class="control-label col-md-3">Server ID:</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
 									<%= @product.product_id ? @product.product_id : '-' %>
@@ -63,7 +66,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label col-md-3">Launch Time :</label>
+							<label class="control-label col-md-3">Launch Time:</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
 									<%= @product.launch_time ? @product.launch_time : '-' %>
@@ -74,7 +77,7 @@
 					<!--/span-->
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label col-md-3">Cost :</label>
+							<label class="control-label col-md-3">Cost:</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
 									$ <%= @product.cost %> per Month
@@ -86,7 +89,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="control-label col-md-3">
-								<%= AppConfig.cloud[:name] == "DigitalOcean" ? 'Size Type :' : 'Server Type :' %>
+								<%= AppConfig.cloud[:name] == "DigitalOcean" ? 'Size Type:' : 'Server Type:' %>
 							</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
@@ -101,7 +104,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label col-md-3">Image ID :</label>
+							<label class="control-label col-md-3">Image ID:</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
 									<%= @product.image_id %>
@@ -114,7 +117,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label col-md-3">Status :</label>
+							<label class="control-label col-md-3">Status:</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
 									<%= content_tag :span, class: instance_state_class(@product.status) do %>
@@ -127,7 +130,7 @@
 					<!--/span-->
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label col-md-3">DNS Name :</label>
+							<label class="control-label col-md-3">DNS Name:</label>
 							<div class="col-md-9">
 								<p class="form-control-static">
 									<%= @product.dns_name %>
@@ -156,9 +159,9 @@
 					<th >Server ID</th>
 					<th>Web Type</th>
 					<th>Product Type</th>
+					<th>Image ID</th>
 					<th>Subscribed On</th>
 					<th>Renewal Date</th>
-					<th>Cost</th>
 					<th >Status</th>
 				</tr>
 			</thead>
@@ -166,13 +169,17 @@
 				<% if @subscriptions %>
 					<% @subscriptions.each do |subscription|%>
 						<tr>
-							<td><%= subscription.id %></td>
+							<td><%= subscription.product ? subscription.product.product_id : '-' %></td>
 							<td><%= subscription.web_type %></td>
 							<td><%= subscription.product_type %></td>
+							<td><%= subscription.image_id %></td>
 							<td><%= subscription.start_date %></td>
-							<td><%= subscription.notify_date %></td>
 							<td><%= subscription.end_date %></td>
-							<td><%= subscription.status%></td>
+							<td>
+								<%= content_tag :span, class: subscription_state_class(subscription.status) do %>
+									<%= subscription.status.camelize if subscription.status %>
+								<% end %>
+							</td>
 						</tr>
 					<%end%>
 				<%end%>
@@ -180,22 +187,32 @@
 		</table>
 	</div>
 </div>
+
+<% content_for :page_scripts do %>
+	<%= javascript_include_tag "jquery.dataTables.min" %>
+	<%= javascript_include_tag "DT_bootstrap" %>
+	<%= javascript_include_tag "select2.min" %>
+<% end %>
+
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
 		window.onload = function() {
 			$('li#nav-elements-server').addClass('active');
 			var oTable = $('#subscribe_table').dataTable({
-			"aoColumnDefs" : [{
-				"bSortable" : true,
-				"aTargets" : []
-			}],
-			"aaSorting" : [[0, 'asc']],
-			"aLengthMenu" : [[5, 15, 20, -1], [5, 15, 20, "All"] // change per page values here
-			],
-			// set the initial value
-			"iDisplayLength" : 10,
-		});
+				"aoColumnDefs" : [{
+					"bSortable" : false,
+					"aTargets" : [6]
+				}],
+				"aaSorting" : [[0, 'asc']],
+				"aLengthMenu" : [[5, 15, 20, -1], [5, 15, 20, "All"] // change per page values here
+				],
+				// set the initial value
+				"iDisplayLength" : 10,
+			});
+			jQuery('#subscribe_table_wrapper .dataTables_filter input').addClass("form-control input-small");// modify table search input
+			jQuery('#subscribe_table_wrapper .dataTables_length select').addClass("form-control input-small");// modify table per page dropdown
+			jQuery('#subscribe_table_wrapper .dataTables_length select').select2();
 		};
-		
-	</script>
+
+</script>
 <% end %>

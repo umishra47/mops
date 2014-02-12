@@ -1,4 +1,5 @@
 <% content_for :page_styles do %>
+	<%= stylesheet_link_tag "select2_metro", media: "all" %>
 	<%= stylesheet_link_tag "DT_bootstrap", media: "all" %>
 <% end %>
 
@@ -66,6 +67,7 @@
 <% content_for :page_scripts do %>
 	<%= javascript_include_tag "jquery.dataTables.min" %>
 	<%= javascript_include_tag "DT_bootstrap" %>
+	<%= javascript_include_tag "select2.min" %>
 <% end %>
 
 <% content_for :inline_scripts do %>
@@ -83,6 +85,9 @@
 			// set the initial value
 			"iDisplayLength" : 10,
 		});
+		jQuery('#sample_1_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+		jQuery('#sample_1_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+		jQuery('#sample_1_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
 	}; 
 </script>
 <% end %>

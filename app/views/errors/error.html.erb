@@ -1,0 +1,29 @@
+<% content_for :page_styles do %>
+	<%= stylesheet_link_tag "error", media: "all" %>
+<% end %>
+<% content_for :breadcrumbs do %>
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="/">
+		Home </a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li>
+		500
+	</li>
+<% end %>
+<div class="page-500">
+	<div class=" number">
+		500
+	</div>
+	<div class=" details">
+		<h3>Oops! Something went wrong.</h3>
+		<p>
+			We are fixing it!
+			<br/>
+			Please come back in a while.
+			<br/>
+			<br/>
+		</p>
+	</div>
+</div>

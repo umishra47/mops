@@ -1,0 +1,27 @@
+<% content_for :page_styles do %>
+	<%= stylesheet_link_tag "error", media: "all" %>
+<% end %>
+<% content_for :breadcrumbs do %>
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="/">
+		Home </a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li>
+		404
+	</li>
+<% end %>
+<div class="page-404">
+	<div class="number">
+		404
+	</div>
+	<div class="details">
+		<h3>Oops! You're lost.</h3>
+		<p>
+			We can not find the page you're looking for.
+			<br/>
+			<%= link_to 'Return home', root_url %> or try the search bar below.
+		</p>
+	</div>
+</div>
