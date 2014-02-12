@@ -9,12 +9,11 @@ class AuthenticationController < ApplicationController
     if authentication
       flash[:notice] = "Signed in successfully."
       sign_in authentication.user 
-      redirect_to root_url
+      redirect_to session[:user_return_to] ? session[:user_return_to] : root_path
     elsif current_user
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
       flash[:notice] = "Authentication successful."
-      redirect_to root_url
-    else
+      redirect_to session[:user_return_to] ? session[:user_return_to] : root_path
       if omniauth['provider'] == "twitter"
         authentication = Authentication.create(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
         session[:auth] = authentication.uid
@@ -24,7 +23,7 @@ class AuthenticationController < ApplicationController
         user.authentications.create(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
         flash[:notice] = "Authentication successful."
         sign_in user
-        redirect_to root_url
+        redirect_to session[:user_return_to] ? session[:user_return_to] : root_path
       else
         user = User.new
         user.skip_confirmation!
@@ -32,10 +31,10 @@ class AuthenticationController < ApplicationController
         if user.save(:validate => false)
           flash[:notice] = "Signed in successfully."
           sign_in user 
-          redirect_to root_url 
+          redirect_to session[:user_return_to] ? session[:user_return_to] : root_path
         else
           session[:omniauth] = omniauth.except('extra')
-          redirect_to root_url 
+          redirect_to session[:user_return_to] ? session[:user_return_to] : root_path
         end
       end
     end
