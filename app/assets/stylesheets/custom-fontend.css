@@ -1,35 +1,23 @@
 /* here you can put your own css to customize and override the theme */
 
-#logoimg{
-	width: 150px;
-	height: 50px;
-}
-
 .header a.logo-v1 img {
-	margin-top: -3px;
+	margin-top: 3px;
 }
 
-.slide_subtitle {
-	background-color: #db3a1b;	
-	text-align: center;
-	color: #fff;
+.slide_desc img{ 
+	opacity: 0.7;
 }	
 
-.slide_subtitle img {
-	margin: 10px auto;
-}
 
 @media (max-width: 992px) {
-
 	.header a.logo-v1 img {
-		margin-top: -15px;
+		margin-top: -8px;
 	}
 
 }
 
-@media (min-width: 768px) and (max-width: 992px) { 
-	
+@media (min-width: 768px) and (max-width: 992px) {	
 	.header .navbar-collapse{		
-		margin-left: 0px;
+		margin-left: -5px;
 	}
 }	

@@ -54,7 +54,9 @@
 					</button>
 					<!-- END RESPONSIVE MENU TOGGLER -->
 					<!-- BEGIN LOGO (you can use logo image instead of text)-->
-					<a class="navbar-brand logo-v1" href="/landing"> <img class="img-responsive" src="assets/logo_mops.png" id="logoimg" alt=""> </a>
+					<a class="navbar-brand logo-v1" href="/">
+						<%= image_tag "logo_mops.png", class: "img-responsive", id: "logoimg.png"%>
+					</a>
 					<!-- END LOGO -->
 				</div>
 
@@ -62,7 +64,7 @@
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li class="dropdown active">
-							<a data-close-others="true" href="/landing"> Home </a>
+							<a data-close-others="true" href="/"> Home </a>
 
 						</li>
 						<li class="dropdown">
@@ -100,19 +102,19 @@
 						<div class="clearfix"></div>
 						<!-- END ABOUT -->
 					</div>
-					<div class="col-md-4 col-sm-4 space-mobile">
+					<div class="col-md-4 col-sm-4 col-md-push-1 space-mobile">
 						<!-- BEGIN CONTACTS -->
 						<h2>Contact Us</h2>
 						<address class="margin-bottom-40">
-							SCO 10,   2nd Floor
+							1853/10
 							<br />
-							Kalgidhar Enclave, Zirakpur,
+							Bhagirath Palace
 							<br />
-							Punjab 140603
+							Delhi 110006
 							<br />
 							India
 							<br />
-							P: (91) 9898 9898
+							P: +91-11-4745-4482
 							<br />
 							Email: <a href="mailto:consulting@enbake.com">consulting@enbake.com</a>
 						</address>
@@ -120,28 +122,9 @@
 					</div>
 					<div class="col-md-4 col-sm-4">
 						<!-- BEGIN TWITTER BLOCK -->
-						<h2>News</h2>
-						<dl class="dl-horizontal f-twitter">
-							<dt>
-								<i class="fa fa-twitter"></i>
-							</dt>
-							<dd>
-								<a href="#">@keenthemes</a>
-								Imperdiet condimentum diam dolor lorem sit consectetur adipiscing
-								<span>3 min ago</span>
-							</dd>
-						</dl>
-						<dl class="dl-horizontal f-twitter">
-							<dt>
-								<i class="fa fa-twitter"></i>
-							</dt>
-							<dd>
-								<a href="#">@keenthemes</a>
-								Sequat ipsum dolor onec eget orci fermentum condimentum lorem sit consectetur adipiscing
-								<span>8 min ago</span>
-							</dd>
-						</dl>
-
+						<div id="tweets">
+							<a class="twitter-timeline" href="https://twitter.com/enbake" data-widget-id="434027135754186753">Tweets by @enbake</a>
+						</div>
 						<!-- END TWITTER BLOCK -->
 					</div>
 				</div>
@@ -155,8 +138,7 @@
 				<div class="row">
 					<div class="col-md-8 col-sm-8">
 						<p>
-							<span class="margin-right-10">2014 © Mops. ALL Rights Reserved.</span>
-							<a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+							<span class="margin-right-10">Copyright © 2014 Enbake Consulting Pvt Ltd. &nbsp; ALL Rights Reserved.</span>
 						</p>
 					</div>
 					<div class="col-md-4 col-sm-4">
@@ -201,7 +183,11 @@
 				App.init();
 				App.initBxSlider();
 				Index.initRevolutionSlider();
+				
 			});
+		</script>
+		<script>
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 		</script>
 		<!-- END PAGE LEVEL JAVASCRIPTS -->
 		<!-- inline scripts related to this page -->

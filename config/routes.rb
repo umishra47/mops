@@ -15,12 +15,11 @@ LoginApp::Application.routes.draw do
     get '/auth/failure' => "users/sessions#new"
     get 'return' => "users/sessions#new"
   end
-  root 'products#index'
+  root 'welcome#landing'
   match '/auth/:provider/callback' => 'authentication#create', via: [:get, :post]
   get "/launch_server" => "products#new", as: :launch_server
   get "/transaction_completed" => "products#show"
   match "/transaction_payment" => "products#transaction_details", via: [:get, :post]
-  get '/landing' => "welcome#landing"
   get '/pricing' => "welcome#pricing"
   get "/404", to: "errors#not_found"
   get "/500", to: "errors#error"
