@@ -13,8 +13,9 @@ Dashboard
 
 <% content_for :inline_scripts do %>
 	<script type="text/javascript">
-		window.onload = function() {
-			$('li#nav-elements-dashboard').addClass('active');
-		};
+	 $(function(){
+	 	$('li#nav-elements-dashboard').addClass('active');
+		$('ul.navbar-nav li:first').addClass('active');
+	 })
 	</script>
 <% end %>
