@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+	<!-- BEGIN HEAD -->
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+		<meta content="Servers" name="description"/>
+		<meta content="enbake" name="author"/>
+		<meta name="MobileOptimized" content="320">
+		<%= csrf_meta_tags %>
+	
+		<!-- BEGIN GLOBAL MANDATORY STYLES -->
+		<%= stylesheet_link_tag "font-awesome.min", media: "all" %>
+		<%= stylesheet_link_tag "bootstrap.min", media: "all" %>
+		<!-- END GLOBAL MANDATORY STYLES -->
+	
+		<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+		<%= stylesheet_link_tag "jquery.fancybox", media: "all" %>
+		<%= stylesheet_link_tag "rs-style.css", media: "all" %>
+		<%= stylesheet_link_tag "settings", media: "all" %>
+		<%= stylesheet_link_tag "jquery.bxslider", media: "all" %>
+		<!-- END PAGE LEVEL PLUGIN STYLES -->
+	
+		<!-- BEGIN THEME STYLES -->
+		<%= stylesheet_link_tag "style-metronic-fontend", media: "all" %>
+		<%= stylesheet_link_tag "style-fontend", media: "all" %>
+		<%= stylesheet_link_tag "red", media: "all" %>
+		<%= stylesheet_link_tag "style-responsive-fontend", media: "all" %>
+		<%= stylesheet_link_tag "custom-fontend", media: "all" %>
+		<!-- END THEME STYLES -->
+	
+		<link rel="shortcut icon" href="assets/favicon.ico" />
+	</head>
+	<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body>	 
+        
+    <!-- BEGIN HEADER -->
+    <div class="header navbar navbar-default navbar-static-top">
+        <!-- BEGIN TOP BAR --> <!--
+        <div class="front-topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-sm-9">
+                        <ul class="list-unstyle inline">
+                            <li><i class="fa fa-phone topbar-info-icon top-2"></i>Call us: <span>+91-11-4745-4482</span></li>
+                            <li class="sep"><span>|</span></li>
+                            <li><i class="fa fa-envelope-o topbar-info-icon top-2"></i>Email: <span>consulting@enbake.com</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-3 login-reg-links">
+                        <ul class="list-unstyled inline">
+                            <li><a href="page_login.html">Login</a></li>
+                            <li class="sep"><span>|</span></li>
+                            <li><a href="page_signup.html">Signup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>        
+        </div> -->
+        <!-- END TOP BAR -->   
+		<div class="container">
+			<div class="navbar-header">
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+				<button class="navbar-toggle btn navbar-btn" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- END RESPONSIVE MENU TOGGLER -->
+				<!-- BEGIN LOGO (you can use logo image instead of text)-->
+				<a class="navbar-brand logo-v1" href="index.html">
+					<img class="img-responsive" src="assets/logo_mops.png" id="logoimg" alt="">
+				</a>
+				<!-- END LOGO -->
+			</div>
+		
+			<!-- BEGIN TOP NAVIGATION MENU -->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown active">
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
+                        	Home
+                        	
+                        </a>
+                       
+					</li>
+                    <li class="dropdown">
+                            <a class="" href="page_prices.html">
+                            Pricing                            
+                        </a>
+                        
+                    </li>					
+					<li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
+                        	Blog                        	
+                        </a>
+                       
+					</li>		
+			
+				</ul>                           
+			</div>
+			<!-- BEGIN TOP NAVIGATION MENU -->
+		</div>
+    </div>
+    <!-- END HEADER -->
+
+    <!-- BEGIN PAGE CONTAINER -->  
+    <div class="page-container">
+        <%= yield %>
+    </div>
+    <!-- END PAGE CONTAINER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 space-mobile">
+                    <!-- BEGIN ABOUT -->                    
+                    <h2>About</h2>
+                    <p class="margin-bottom-30">Vivamus imperdiet felis consectetur onec eget orci adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+                    <div class="clearfix"></div>                    
+                    <!-- END ABOUT -->                                       
+                </div>
+                <div class="col-md-4 col-sm-4 space-mobile">
+                    <!-- BEGIN CONTACTS -->                                    
+                    <h2>Contact Us</h2>
+                    <address class="margin-bottom-40">
+                        SCO 10,   2nd Floor <br />
+                        Kalgidhar Enclave, Zirakpur, <br />
+                        Punjab 140603 <br />
+                        India <br />
+                        P: (91) 9898 9898 <br />
+                        Email: <a href="mailto:consulting@enbake.com">consulting@enbake.com</a>                        
+                    </address>
+                    <!-- END CONTACTS -->                                      
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <!-- BEGIN TWITTER BLOCK -->                                                    
+                    <h2>News</h2>
+                    <dl class="dl-horizontal f-twitter">
+                        <dt><i class="fa fa-twitter"></i></dt>
+                        <dd>
+                            <a href="#">@keenthemes</a>
+                            Imperdiet condimentum diam dolor lorem sit consectetur adipiscing
+                            <span>3 min ago</span>
+                        </dd>
+                    </dl>                    
+                    <dl class="dl-horizontal f-twitter">
+                        <dt><i class="fa fa-twitter"></i></dt>
+                        <dd>
+                            <a href="#">@keenthemes</a>
+                            Sequat ipsum dolor onec eget orci fermentum condimentum lorem sit consectetur adipiscing
+                            <span>8 min ago</span>
+                        </dd>
+                    </dl>                   
+                    
+                    <!-- END TWITTER BLOCK -->                                                                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+                    <p>
+                        <span class="margin-right-10">2014 © Mops. ALL Rights Reserved.</span> 
+                        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <ul class="social-footer">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>                       
+                        <li><a href="#"><i class="fa fa-github"></i></a></li>                          
+                    </ul>                
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END COPYRIGHT -->
+
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>  
+    <![endif]-->  
+    <%= javascript_include_tag "jquery-1.10.2.min" %>
+    <%= javascript_include_tag "jquery-migrate-1.2.1.min" %>
+    <%= javascript_include_tag "bootstrap.min" %>
+    <%= javascript_include_tag "hover-dropdown" %>
+    <%= javascript_include_tag "back-to-top" %>
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS(REQUIRED ONLY FOR CURRENT PAGE) -->
+    <%= javascript_include_tag "jquery.fancybox.pack.js" %>
+    <%= javascript_include_tag "jquery.themepunch.plugins.min" %>
+    <%= javascript_include_tag "jquery.themepunch.revolution.min" %>
+    <%= javascript_include_tag "jquery.bxslider.min" %>
+    <%= javascript_include_tag "app-frontend" %>
+    <%= javascript_include_tag "index-frontend" %>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            App.init();    
+            App.initBxSlider();
+            Index.initRevolutionSlider();                    
+        });
+    </script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
