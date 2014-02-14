@@ -14,6 +14,7 @@ class AuthenticationController < ApplicationController
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
       flash[:notice] = "Authentication successful."
       redirect_to session[:user_return_to] ? session[:user_return_to] : root_path
+    else
       if omniauth['provider'] == "twitter"
         authentication = Authentication.create(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
         session[:auth] = authentication.uid
