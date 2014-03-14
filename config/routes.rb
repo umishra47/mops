@@ -7,7 +7,7 @@ LoginApp::Application.routes.draw do
   get "authentication/destroy"
   resources :servers, controller: "products"
 
-  devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords"}
+  devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", confirmations: 'users/confirmations' }
   devise_scope :user do
     match 'login', to: "users/sessions#new", via: [:get, :post], as: "login"
     get "logout", to: "devise/sessions#destroy", as: "logout"
