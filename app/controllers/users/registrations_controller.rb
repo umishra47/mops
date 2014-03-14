@@ -23,15 +23,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
         user = User.find_by_email(params[:user][:email])
       else
         user = User.new
-        user.skip_confirmation!
+        #user.skip_confirmation!
         user.email = params[:user][:email]
         user.save(:validate => false)
       end
       auth = Authentication.find_by_uid(session[:auth])
       user.authentications << auth
-      flash[:notice] = "Signed in successfully."
-      sign_in user 
-      redirect_to root_url
+      if user.confirmed?
+        flash[:notice] = "Signed in successfully."
+        sign_in user 
+        redirect_to session[:user_return_to] ? session[:user_return_to] : root_url
+      else
+        flash[:notice] = "You have to confirm your account before continuing."
+        redirect_to login_url, :params => params
+      end
     end
   end
 
