@@ -30,7 +30,7 @@ class Product < ActiveRecord::Base
       :cancel_return => AppConfig.cancel_url,
       :custom => id
     }
-    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+    AppConfig.paypal_url + "cgi-bin/webscr?" + values.to_query
   end
   
   def add_ssh_keys
