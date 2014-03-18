@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token
   
   def after_sign_out_path_for(resource)
-    login_path
+    '/'
   end
   
   def root_path

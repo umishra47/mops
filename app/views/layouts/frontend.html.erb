@@ -27,6 +27,7 @@
 		<!-- END PAGE LEVEL PLUGIN STYLES -->
 
 		<!-- BEGIN THEME STYLES -->
+		<%= stylesheet_link_tag "toastr.min", media: "all" %>
 		<%= stylesheet_link_tag "style-metronic-fontend", media: "all" %>
 		<%= stylesheet_link_tag "style-fontend", media: "all" %>
 		<%= stylesheet_link_tag "prices", media: "all" %>
@@ -44,6 +45,33 @@
 
 		<!-- BEGIN HEADER -->
 		<div class="header navbar navbar-default navbar-static-top">
+			<!-- BEGIN TOP BAR -->
+			<div class="front-topbar">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-9 col-sm-9">
+							<ul class="list-unstyle inline">
+								<li><i class="fa fa-phone topbar-info-icon top-2"></i>Call us: <span>(+91)-11-4745-4482</span></li>
+								<li class="sep"><span>|</span></li>
+								<li><i class="fa fa-envelope-o topbar-info-icon top-2"></i>Email: <span>consulting@enbake.com</span></li>
+							</ul>
+						</div>
+						<div class="col-md-3 col-sm-3 login-reg-links">
+							<ul class="list-unstyled inline">
+								<% if user_signed_in? %>
+									<li><%= link_to 'Dashboard', servers_path %></li>
+									<li class="sep"><span>|</span></li>
+									<li><%= link_to 'Logout', logout_path %></li>
+								<% else %>
+									<li><%= link_to 'Login', login_path %></li>
+								<% end %>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END TOP BAR -->
+
 			<div class="container">
 				<div class="navbar-header">
 					<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -176,6 +204,7 @@
 		<%= javascript_include_tag "jquery.bxslider.min" %>
 		<%= javascript_include_tag "app-frontend" %>
 		<%= javascript_include_tag "index-frontend" %>
+		<%= javascript_include_tag "toastr.min" %>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				App.init();
@@ -191,6 +220,22 @@
 		<!-- inline scripts related to this page -->
 		<%= yield :inline_scripts %>
 		<!-- END JAVASCRIPTS -->
+		<script>
+			jQuery(document).ready(function() {
+				App.init();
+				toastr.options = {"closeButton": true, "debug": false, "positionClass": "toast-top-right",
+									"onclick": null, "showDuration": "300000", "hideDuration": "1000000000",
+									"timeOut": "50000000", "extendedTimeOut": "100000000", "showEasing": "swing",
+									"hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"}
+				<% flash.each do |type, message| %>
+					<% if type == :notice %>
+						toastr.success("<%= message%>");
+					<% else %>
+						toastr.error("<%= message%>");
+					<% end %>
+				<% end %>
+			});
+		</script>
 	</body>
 	<!-- END BODY -->
 </html>
