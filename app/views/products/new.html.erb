@@ -40,7 +40,7 @@
 							<% AppConfig.image_ids.each do |id| %>
 								<div class="col-md-3 well images" style="cursor:pointer;">
 									<input type="radio" name="product[image_id]" class="product_image hidden" value="<%= id.last %>" />
-									<%= image_tag "Vtiger-logo.png", class: 'img-responsive'%>
+									<%= product_image id.first %>
 								</div>
 								<div class="col-md-1"></div>
 							<% end %>
@@ -67,7 +67,6 @@
 							<div class="col-md-3 well sizes" style="cursor:pointer;" id="<%= it.name.downcase %>">
 								<input type="radio" name="product[size_type]" class="product_type hidden" value="<%= it.size_id %>" />
 								<h4 class="text-center"><b><%= it.name %></b></h4>
-								<div class="row text-center"><%= it.cpu %> CPU unit(s)</div>
 								<div class="row text-center"><%= it.memory %> Memory</div>
 								<div class="row text-center"><%= it.disk %> GB SSD Disk</div>
 								<div class="row text-center"><%= it.cost %></div>
