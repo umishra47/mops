@@ -87,5 +87,5 @@ LoginApp::Application.configure do
   password:             'dummy0000',
   authentication:       'plain'}
   
-  config.action_mailer.default_url_options = { :host => 'ec2-50-16-150-221.compute-1.amazonaws.com'}
+  config.action_mailer.default_url_options = { :host => 'mops.enbake.com'}
 end
