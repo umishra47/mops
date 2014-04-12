@@ -5,6 +5,8 @@ module ProductsHelper
       "Vtiger-logo.png"
     when "Sugar6516"
       "logo_sugarcrm.png"
+    when "RailsImage"
+      "rails.png"
     end
     image_tag image_path, class: 'img-responsive', style: 'text-align:center'
   end

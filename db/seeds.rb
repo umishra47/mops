@@ -15,6 +15,7 @@ SizeType.delete_all
 SizeType.create(size_id: 63, name: 'Basic', disk: 30, memory: 1, cpu: 1, cost_per_month: 20.0)
 SizeType.create(size_id: 62, name: 'Small', disk: 40, memory: 2, cpu: 2, cost_per_month: 50.0)
 SizeType.create(size_id: 64, name: 'Business', disk: 60, memory: 4, cpu: 2, cost_per_month: 90.0)
+SizeType.create(size_id: 65, name: 'Enterprise', disk: 80, memory: 8, cpu: 4, cost_per_month: 240.0)
 
 RegionType.delete_all
 RegionType.create(region_id: 1, name: "New York 1", slug: "nyc1")
