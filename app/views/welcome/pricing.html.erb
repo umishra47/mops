@@ -22,7 +22,7 @@
 <div class="container min-hight">
 	<!-- BEGIN PRICING OPTION1 -->
 	<div class="row margin-bottom-40">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="pricing">
 				<div class="pricing-head">
 					<h3>Basic<span>Give it a start</span></h3>
@@ -46,8 +46,8 @@
 			</div>
 		</div>
 
-		<div class="col-md-4">
-			<div class="pricing">
+		<div class="col-md-3">
+			<div class="pricing pricing-active">
 				<div class="pricing-head">
 					<h3>Small<span>Expand to next Level</span></h3>
 					<h4><i>$</i>50<i>.00</i><span>Per Month</span></h4>
@@ -69,8 +69,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="pricing pricing-active">
+		<div class="col-md-3">
+			<div class="pricing">
 				<div class="pricing-head ">
 					<h3>Business<span>For Large Organisations</span></h3>
 					<h4><i>$</i>90<i>.00</i><span>Per Month</span></h4>
@@ -88,6 +88,29 @@
 				</ul>
 				<div class="pricing-footer">
 					<p>Typically for large scale Organisations having multiple teams and more complex processes</p>
+					<a href="<%= launch_server_path(type: "business")%>" class="btn theme-btn">Launch</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="pricing">
+				<div class="pricing-head ">
+					<h3>Custom<span>For All Other Needs</span></h3>
+					<h4><i>As per your Budget</i></h4>
+				</div>
+				<ul class="pricing-content list-unstyled">
+					<li>
+						<i class="icon-tags"></i> Custom Apps Hosting(RoR, Cakephp, Any stack)
+					</li>
+					<li>
+						<i class="icon-asterisk"></i> Server Location of Your Choice
+					</li>
+					<li>
+						<i class="icon-heart"></i> Wide Range of Storage and RAM Options
+					</li>
+				</ul>
+				<div class="pricing-footer">
+					<p>Typically for custom applications demanding high availability and scalability</p>
 					<a href="<%= launch_server_path(type: "business")%>" class="btn theme-btn">Launch</a>
 				</div>
 			</div>
