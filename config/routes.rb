@@ -21,6 +21,7 @@ LoginApp::Application.routes.draw do
   get "/transaction_completed" => "products#show"
   match "/transaction_payment" => "products#transaction_details", via: [:get, :post]
   get '/pricing' => "welcome#pricing"
+  get '/faq' => "static_pages#tos"
   get "/404", to: "errors#not_found"
   get "/500", to: "errors#error"
 end
