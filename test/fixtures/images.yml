@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  hosting: MyString
+  remote_image_id: MyString
+  price: 1.5
+  ram: 1
+
+two:
+  name: MyString
+  hosting: MyString
+  remote_image_id: MyString
+  price: 1.5
+  ram: 1

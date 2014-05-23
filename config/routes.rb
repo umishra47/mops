@@ -6,7 +6,9 @@ LoginApp::Application.routes.draw do
   get "authentication/create"
   get "authentication/destroy"
   resources :servers, controller: "products"
-  resources :images
+  namespace :admin do
+    resources :images
+  end
 
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", confirmations: 'users/confirmations' }
   devise_scope :user do
@@ -25,5 +27,4 @@ LoginApp::Application.routes.draw do
   get '/faq' => "static_pages#tos"
   get "/404", to: "errors#not_found"
   get "/500", to: "errors#error"
-  get "/admin/images/new", to: "images#new"
 end
