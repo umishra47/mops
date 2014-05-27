@@ -1,4 +1,4 @@
-class Admin::ImagesController < ApplicationController
+class Admin::CustomImagesController < ApplicationController
 
   def new
     unless current_user.is_admin
@@ -6,7 +6,7 @@ class Admin::ImagesController < ApplicationController
       redirect_to "/"
     end
 
-    @image = Image.new
+    @image = CustomImage.new
   end
 
   def create
@@ -15,12 +15,13 @@ class Admin::ImagesController < ApplicationController
       redirect_to "/"
     end
 
-    @image = Image.create(image_params)
+    @image = CustomImage.create(image_params)
     @image.save!
   end
 
 private
   def image_params
-    params.require(:image).permit(:name, :hosting, :remote_image_id, :price, :ram, :description)
+    params.require(:custom_image).permit(:name, :hosting, :remote_image_id,
+          :price, :ram, :region_slug_do, :description)
   end
 end

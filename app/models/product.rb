@@ -11,10 +11,14 @@ class Product < ActiveRecord::Base
   before_create :add_ssh_keys
 
   def paypal_url
-    if web_name == "AWS"
-      val = product_type
-    elsif web_name == "DigitalOcean"
-      val = SizeType.find_by_size_id(size_type).name
+    if custom_image_id
+      val = "Custom Image #{custom_image_id}"
+    else
+      if web_name == "AWS"
+        val = product_type
+      elsif web_name == "DigitalOcean"
+        val = SizeType.find_by_size_id(size_type).name
+      end
     end
     values = {
       :business => AppConfig.business_email,
@@ -39,4 +43,32 @@ class Product < ActiveRecord::Base
     self[:public_ssh_key] = key.ssh_public_key
   end
 
+  # set_attributes
+  # To be called only when cost and other calculable attributes are to be set.
+  def set_attributes
+    web_name = AppConfig.cloud[:name]
+    if custom_image_id
+      ci = CustomImage.find_by_id!(custom_image_id)
+      cost = ci.price
+
+      #Map product_type or size_type since that is being used across the app.
+      if ci.hosting == "AWS"
+        pt = ProductType.find_by_memory!(ci.ram)
+        product_type = pt.name
+        size_type = nil
+      elsif ci.hosting == "DigtalOcean"
+        st = SizeType.find_by_memory!(ci.ram)
+        size_type = st.size_id
+        product_type = nil
+      end
+    else
+      if type == "AWS"
+        cost = ProductType.find_by_name(params[:product][:product_type]).cost_per_month
+      elsif type == "DigitalOcean"
+        cost = SizeType.find_by_size_id(params[:product][:size_type]).cost_per_month
+      end
+    end
+
+    self.status = 'pending'
+  end
 end

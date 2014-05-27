@@ -26,8 +26,9 @@ module AwsAction
   def launch_droplet
     begin
       ssh_key = Digitalocean::SshKey.create(name: "#{name}_#{id}", ssh_pub_key: public_ssh_key)
+      region_slug = region_slug_do.nil? ? Hash[AppConfig.region_ids].key(image_id.to_i) : region_slug_do
       response = Digitalocean::Droplet.create({name: name, size_id: size_type, image_id: image_id.to_i, 
-                                               region_id: Hash[AppConfig.region_ids].key(image_id.to_i), 
+                                               region_slug: region_slug, 
                                                ssh_key_ids: ssh_key.ssh_key.id.to_s})
       sleep 15
       response1 = Digitalocean::Droplet.retrieve(response.droplet.id)

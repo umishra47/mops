@@ -21,19 +21,18 @@ class ProductsController < ApplicationController
   end
 
   def new
-    respond_with @product = current_user.products.new
+    if params[:custom_image_id]
+        @image = CustomImage.find_by_id!(params[:custom_image_id])
+    end
+    respond_with @image, @product = current_user.products.new
   end
 
   def create
     Product.transaction do
-      @product = current_user.products.create(product_params)
-      type = AppConfig.cloud[:name]
-      if type == "AWS"
-        cost = ProductType.find_by_name(params[:product][:product_type]).cost_per_month
-      elsif type == "DigitalOcean"
-        cost = SizeType.find_by_size_id(params[:product][:size_type]).cost_per_month
-      end
-      @product.update_attributes(web_name: type, cost: cost, status: 'pending')
+      @product = current_user.products.new(product_params)
+      @product.set_attributes(params[:product])
+      @product.save!
+
       paypal_url = @product.paypal_url
       if paypal_url
         redirect_to paypal_url
@@ -73,7 +72,7 @@ class ProductsController < ApplicationController
 
   def transaction_details
     product = Product.find(params[:custom])
-    Product.transaction do 
+    Product.transaction do
       if params[:txn_type] == "subscr_signup"
         UserMailer.notification_email(product.user, product).deliver
         product.update_attributes(profileId: params[:subscr_id])
@@ -137,7 +136,8 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :product_type, :size_type, :image_id, :region_id)
+    params.require(:product).permit(:name, :product_type, :size_type,
+          :image_id, :region_slug_do, :custom_image_id)
   end
 
 end
