@@ -5,7 +5,7 @@ class CreateCustomImages < ActiveRecord::Migration
       t.string :hosting
       t.string :remote_image_id
       t.float :price
-      t.integer :ram
+      t.decimal :ram
       t.string :region_slug_do
       t.text :description
 

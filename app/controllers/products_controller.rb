@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
   def create
     Product.transaction do
       @product = current_user.products.new(product_params)
-      @product.set_attributes(params[:product])
+      @product.set_attributes
       @product.save!
 
       paypal_url = @product.paypal_url
@@ -137,7 +137,7 @@ class ProductsController < ApplicationController
   private
   def product_params
     params.require(:product).permit(:name, :product_type, :size_type,
-          :image_id, :region_slug_do, :custom_image_id)
+          :image_id, :region, :custom_image_id)
   end
 
 end

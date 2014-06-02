@@ -22,6 +22,6 @@ class Admin::CustomImagesController < ApplicationController
 private
   def image_params
     params.require(:custom_image).permit(:name, :hosting, :remote_image_id,
-          :price, :ram, :region_slug_do, :description)
+          :price, :ram, :region, :description)
   end
 end

@@ -46,26 +46,28 @@ class Product < ActiveRecord::Base
   # set_attributes
   # To be called only when cost and other calculable attributes are to be set.
   def set_attributes
-    web_name = AppConfig.cloud[:name]
-    if custom_image_id
+    self.web_name = AppConfig.cloud[:name]
+    if self.custom_image_id
       ci = CustomImage.find_by_id!(custom_image_id)
-      cost = ci.price
+      self.cost = ci.price
+      self.region = ci.region
+      self.image_id = ci.remote_image_id
 
       #Map product_type or size_type since that is being used across the app.
       if ci.hosting == "AWS"
         pt = ProductType.find_by_memory!(ci.ram)
-        product_type = pt.name
-        size_type = nil
-      elsif ci.hosting == "DigtalOcean"
+        self.product_type = pt.name
+        self.size_type = nil
+      elsif ci.hosting == "DigitalOcean"
         st = SizeType.find_by_memory!(ci.ram)
-        size_type = st.size_id
-        product_type = nil
+        self.size_type = st.size_id
+        self.product_type = nil
       end
     else
       if type == "AWS"
-        cost = ProductType.find_by_name(params[:product][:product_type]).cost_per_month
+        self.cost = ProductType.find_by_name(params[:product][:product_type]).cost_per_month
       elsif type == "DigitalOcean"
-        cost = SizeType.find_by_size_id(params[:product][:size_type]).cost_per_month
+        self.cost = SizeType.find_by_size_id(params[:product][:size_type]).cost_per_month
       end
     end
 
