@@ -1,5 +1,9 @@
 class Admin::CustomImagesController < ApplicationController
 
+  def index
+    @images = CustomImage.all
+  end
+
   def new
     unless current_user.is_admin
       flash[:error] = "You are not authorised to visit this page."
