@@ -25,3 +25,12 @@ every :day, :at => '1200am'do
   rake "job_scheduler:send_renew_alert"
 end
 
+
+every 1.day, :at => '12:01 am' do
+	rake "job_scheduler:making_dump"
+end
+
+every 1.month, :at => '12:01 am' do
+	rake "job_scheduler:deleting_dump"
+end
+
